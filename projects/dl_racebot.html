@@ -321,48 +321,15 @@
         <div class="hero-inner">
           <div class="hero-media">
             <div class="track-visual">
-              <!-- Animated race track top-down view -->
-              <svg viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Outer track boundary -->
-                <rect x="10" y="10" width="260" height="260" rx="50" stroke="#d1cfc8" stroke-width="2" fill="none"/>
-                <!-- Inner track boundary -->
-                <rect x="60" y="60" width="160" height="160" rx="28" stroke="#d1cfc8" stroke-width="2" fill="#eeece6"/>
-                <!-- Track surface shading -->
-                <rect x="10" y="10" width="260" height="260" rx="50" fill="#e8e6e0"/>
-                <rect x="60" y="60" width="160" height="160" rx="28" fill="#f5f4f0"/>
-                <!-- Finish line markings -->
-                <rect x="128" y="10" width="8" height="14" fill="#121316" opacity=".6"/>
-                <rect x="144" y="10" width="8" height="14" fill="#fff" opacity=".6"/>
-                <rect x="128" y="24" width="8" height="14" fill="#fff" opacity=".6"/>
-                <rect x="144" y="24" width="8" height="14" fill="#121316" opacity=".6"/>
-                <!-- Checkpoint arrows -->
-                <text x="207" y="148" font-size="12" fill="#5a606b" text-anchor="middle">›</text>
-                <text x="140" y="53" font-size="12" fill="#5a606b" text-anchor="middle">›</text>
-                <text x="73" y="148" font-size="12" fill="#5a606b" text-anchor="middle" transform="rotate(180 73 148)">›</text>
-                <text x="140" y="242" font-size="12" fill="#5a606b" text-anchor="middle" transform="rotate(180 140 242)">›</text>
-                <!-- Labels -->
-                <text x="140" y="155" font-size="11" fill="#9ca3af" text-anchor="middle" font-family="monospace">INNER</text>
-
-                <!-- Car dot animating along the track using offset-path -->
-                <style>
-                  .car-path {
-                    offset-path: path("M 140 22 C 200 22 258 72 258 140 C 258 208 208 258 140 258 C 72 258 22 208 22 140 C 22 72 80 22 140 22");
-                    animation: drivecar 4s linear infinite;
-                  }
-                  @keyframes drivecar {
-                    from { offset-distance: 0%; }
-                    to   { offset-distance: 100%; }
-                  }
-                </style>
-                <g class="car-path">
-                  <!-- simple car shape -->
-                  <rect x="-7" y="-4" width="14" height="9" rx="3" fill="#121316"/>
-                  <rect x="-4" y="-7" width="8" height="6" rx="2" fill="#374151"/>
-                  <circle cx="-5" cy="5" r="2" fill="#9ca3af"/>
-                  <circle cx="5" cy="5" r="2" fill="#9ca3af"/>
-                </g>
-                <!-- LIDAR rays emanating from car (decorative) -->
-              </svg>
+            <div class="video-slot" id="slot0">
+            <video
+              src="../assets/SP2_GoAroundObstacle_01 .mov"
+              autoplay
+              loop
+              muted
+              playsinline
+            ></video>
+          </div>
             </div>
           </div>
 
