@@ -53,6 +53,23 @@
     overflow: hidden;
     margin-bottom: 16px;
   }
+  
+  .video-slot {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  width: 320px;
+  flex-shrink: 0;
+}
+
+.video-slot video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
     
     .skip-link:focus{ left:10px; z-index:999; }
     .site-header{
@@ -91,12 +108,13 @@
     .icon-btn:hover{ box-shadow:var(--shadow); transform:translateY(-1px); }
     .icon-btn:hover svg{ color:var(--ink); }
     .hero{ padding:44px 0 10px; }
-    .hero-inner{
-      display:grid;
-      grid-template-columns: 320px 1fr;
-      gap:28px;
-      align-items:start;
-    }
+.hero-inner {
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  align-items: start;
+}
+
     .hero-media{
       border-radius:var(--radius);
       overflow:hidden;
