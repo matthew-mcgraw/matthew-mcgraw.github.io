@@ -286,3 +286,230 @@ h2{
   .cards{ grid-template-columns: 1fr; }
   .nav{ display:none; } /* keeps header clean on mobile like many portfolio templates */
 }
+/* ─── drone_mp.html page-specific styles ─── */
+
+/* Override font vars to use Sora */
+body {
+  font-family: 'Sora', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ─── Hero visual: animated SVG path diagram ─── */
+.hero-media {
+  position: relative;
+  background: #0d0f14;
+  border-color: #1e2228;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-media canvas-wrap {
+  display: block;
+  width: 100%;
+}
+
+.sst-diagram {
+  width: 100%;
+  padding: 10px;
+}
+
+/* Animated tree paths */
+.tree-path {
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: drawPath 2s ease forwards;
+}
+.tree-path:nth-child(2) { animation-delay: 0.2s; }
+.tree-path:nth-child(3) { animation-delay: 0.4s; }
+.tree-path:nth-child(4) { animation-delay: 0.6s; }
+.tree-path:nth-child(5) { animation-delay: 0.8s; }
+
+.drone-dot {
+  animation: pulseDrone 2s ease-in-out infinite;
+}
+
+.goal-ring {
+  animation: pulseGoal 1.8s ease-in-out infinite;
+}
+
+@keyframes drawPath {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes pulseDrone {
+  0%, 100% { r: 5; opacity: 1; }
+  50% { r: 7; opacity: 0.7; }
+}
+@keyframes pulseGoal {
+  0%, 100% { stroke-opacity: 1; }
+  50% { stroke-opacity: 0.3; }
+}
+
+/* ─── Tech chip badges ─── */
+.tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.chip {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  background: #0d0f14;
+  color: #a8b4c8;
+  border: 1px solid #2a2e38;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: .3px;
+}
+
+/* ─── Algorithm highlight block ─── */
+.algo-block {
+  background: #0d0f14;
+  border: 1px solid #1e2228;
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin: 14px 0;
+}
+
+.algo-block pre {
+  font-family: 'DM Mono', monospace;
+  font-size: 12.5px;
+  color: #7dd3a8;
+  margin: 0;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.algo-block .comment { color: #4d566a; }
+.algo-block .keyword { color: #82b4ff; }
+.algo-block .fn { color: #e8a87c; }
+.algo-block .num { color: #c5a5f5; }
+
+/* ─── State space table ─── */
+.state-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  margin-top: 10px;
+}
+
+.state-table th {
+  font-weight: 600;
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.state-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--line);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+}
+
+.state-table tr:last-child td { border-bottom: none; }
+
+.state-table tr:hover td { background: rgba(0,0,0,.02); }
+
+/* ─── Pipeline steps ─── */
+.pipeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.pipe-step {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  position: relative;
+}
+
+.pipe-step::after {
+  content: '→';
+  position: absolute;
+  right: -12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 14px;
+  z-index: 1;
+}
+
+.pipe-step:last-child::after { display: none; }
+
+.pipe-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.pipe-step h4 {
+  margin: 0 0 4px;
+  font-size: 13px;
+  letter-spacing: -.1px;
+}
+
+.pipe-step p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ─── Inline stat pills ─── */
+.stat-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 14px 0;
+}
+
+.stat-box {
+  flex: 1;
+  min-width: 120px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.stat-box .stat-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -.5px;
+  line-height: 1;
+}
+
+.stat-box .stat-label {
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ─── Divider ─── */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 4px 0;
+}
+
+@media (max-width: 900px) {
+  .pipeline { grid-template-columns: 1fr 1fr; }
+  .pipe-step::after { display: none; }
+}
+
+@media (max-width: 600px) {
+  .pipeline { grid-template-columns: 1fr; }
+}
