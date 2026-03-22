@@ -88,7 +88,7 @@
               <span class="pill">SP1</span>
             </div>
 
-<!--             <div class="video-slot" id="slot1" onclick="triggerUpload('slot1','file1')">
+            <!--             <div class="video-slot" id="slot1" onclick="triggerUpload('slot1','file1')">
               <div class="play-btn">
                 <svg width="12" height="14" viewBox="0 0 12 14" fill="white">
                   <path d="M0 0l12 7-12 7z" />
@@ -204,25 +204,28 @@
 
   <!-- Footer -->
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div>
-          <p class="footer-title">BB-8 STUNTS</p>
-          <p class="footer-sub">Decision Making under Uncertainty · CU Boulder · Spring 2023</p>
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-title">Matthew McGraw</p>
+        <p class="footer-sub">Contact: <a class="text-link"
+            href="mailto:matthew.sm.mcgraw@gmail.com">matthew.sm.mcgraw@gmail.com</a></p>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="../projects.html">Projects</a>
         </div>
-        <div class="footer-right">
-          <div class="footer-links">
-            <a href="https://github.com/matthew-mcgraw/BB-8_STUNTS">GitHub</a>
-            <a href="https://arxiv.org/abs/1707.06347">PPO Paper</a>
-            <a href="https://cyberbotics.com">Webots</a>
-            <a href="https://github.com/aidudezzz/deepbots">Deepbots</a>
-          </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/matthew-sm-mcgraw/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="https://github.com/matthew-mcgraw" target="_blank" rel="noreferrer">GitHub</a>
         </div>
       </div>
-      <p class="footer-bottom">PPO adapted from Deepbots · Schulman et al., Proximal Policy Optimization Algorithms
-        (2017)</p>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span id="y"></span> Matthew McGraw</span>
     </div>
   </footer>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 
   <script>
     function triggerUpload(slotId, fileId) {
