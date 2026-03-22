@@ -128,14 +128,16 @@
             <p class="kicker">Motion Planning · Robotics · CU Boulder</p>
             <h1>Drone Motion Planning</h1>
             <p class="lede">
-              A Python implementation of the SST* (Stable Sparse RRT) motion planning algorithm for navigating
-              a drone through 3D environments — originally built to autonomously follow a snowboarder through dense
-              forestry using dynamically-feasible trajectories.
+              A from-scratch Python implementation of the SST (Stable Sparse RRT) motion planning algorithm, built as a
+              final project for Advanced Motion Planning at CU Boulder. The goal: plan dynamically-feasible drone
+              trajectories through a dense 3D forestry environment to follow and film a snowboarder on backcountry
+              slopes.
             </p>
             <p class="lede">
-              The system integrates mesh-based collision detection, Monte Carlo propagation, and witness-region pruning
-              to produce
-              sparse yet near-optimal trajectory trees under realistic vehicle dynamics.
+              The environment was created in Unreal Engine 5 using Megascans foliage and exported to STL/OBJ via
+              Blender. After 60+ hours wrestling with C++ and OMPL, the entire planner was rebuilt from scratch in
+              Python — integrating ODE-based trajectory propagation, mesh collision detection, and witness-region
+              pruning.
             </p>
 
             <div class="tech-chips">
@@ -187,54 +189,56 @@
       <section class="section" id="algorithm">
         <div class="section-head">
           <h2>Project Subproblems</h2>
+          <span style="font-size:12px; color:var(--muted);">CU Boulder · Advanced Motion Planning · Dec 2022</span>
         </div>
         <div class="cards">
 
           <div class="card">
             <div class="card-top">
-              <h3>Subproblem 1 — No Dynamics</h3>
+              <h3>Subproblem 1 — Drone &amp; Terrain</h3>
               <span class="pill">Baseline</span>
             </div>
             <p>
-              A kinematic-only planner that navigates the drone through the flat-slope forestry scene.
-              Collision checking is performed by sampling sphere proxies along candidate paths against the environment
-              STL mesh.
-              Serves as the foundation for understanding SST tree growth and pruning.
+              Build a traversable environment and planners for both the drone and snowboarder. The snowboarder is
+              modeled as a 40 cm × 170 cm cylinder with its own non-dynamic planner, providing time-step position data
+              for the drone to follow. The environment is a flat forestry scene built in Unreal Engine 5 and exported as
+              an STL.
             </p>
             <div class="card-meta">
               <span>SubProblem1_NoDynamics.py</span>
-              <span>δ_bn = 2 · T_prop = 2s</span>
+              <span>Non-dynamic baseline</span>
             </div>
           </div>
 
           <div class="card">
             <div class="card-top">
-              <h3>Subproblem 1 — With Dynamics</h3>
-              <span class="pill">Full Model</span>
+              <h3>Subproblem 2 — Camera Pointing</h3>
+              <span class="pill">In Progress</span>
             </div>
             <p>
-              Adds a full nonlinear drone dynamic model. Trajectories are integrated using <code>scipy.odeint</code>
-              over randomly sampled propagation times. Pitch and velocity bounds are enforced at every integration step
-              before a new vertex is accepted into the active set.
+              Plan trajectories that keep the drone within the region around the snowboarder AND have the camera pointed
+              towards them for a minimum of 60% of states. The 60% threshold is intentionally achievable — requiring
+              100% camera coverage may make a full-run path infeasible in dense foliage.
             </p>
             <div class="card-meta">
-              <span>SP1_SST_MOTION_PLANNER-DRONE_IN_DENSE_FORESTRY.py</span>
+              <span>SP1_SST_MOTION_PLANNER...</span>
+              <span>Dynamic model</span>
             </div>
           </div>
 
           <div class="card">
             <div class="card-top">
-              <h3>SST* Core Algorithm</h3>
-              <span class="pill">Algorithm</span>
+              <h3>Subproblem 3 — Multi-Drone</h3>
+              <span class="pill">Future Work</span>
             </div>
             <p>
-              Implements the Stable Sparse Tree planner with best-first node selection, witness regions for pruning
-              dominated vertices, and Monte Carlo random control propagation — yielding
-              sparse, near-asymptotically-optimal path trees.
+              The most ambitious goal: multiple drones flying near the snowboarder, each maintaining ~60% camera
+              coverage while avoiding collisions with both the environment and each other. This remains future work —
+              the single-drone dynamic planner was the focus of this project.
             </p>
             <div class="card-meta">
-              <span>MotionPlanningAlgorithms/SST.py</span>
-              <span>δ_s = 1.5</span>
+              <span>Planned extension</span>
+              <span>Multi-agent</span>
             </div>
           </div>
 
@@ -246,33 +250,34 @@
       <!-- ── HOW SST WORKS PIPELINE ── -->
       <section class="section">
         <div class="section-head">
-          <h2>How SST* Works</h2>
+          <h2>How SST Works</h2>
+          <span style="font-size:12px; color:var(--muted);">Based on Li, Littlefield &amp; Bekris, IJRR 2014</span>
         </div>
 
         <div class="pipeline">
           <div class="pipe-step">
             <div class="pipe-num">01</div>
-            <h4>Sample State</h4>
-            <p>Uniformly sample a random state inside the bounding mesh volume. With 5% probability, bias toward the
-              goal.</p>
+            <h4>Best_First_Selection</h4>
+            <p>Sample a random state inside the bounding volume. With 5% probability, bias toward the goal. Find the
+              lowest-cost active vertex within δ_BN — if none exist, extend from the closest node instead.</p>
           </div>
           <div class="pipe-step">
             <div class="pipe-num">02</div>
-            <h4>Best-First Select</h4>
-            <p>Find the lowest-cost active vertex within δ_bn of the sample. If none exist, extend toward the closest
-              node.</p>
+            <h4>MonteCarlo_Prop</h4>
+            <p>Apply random control inputs (ω, α, a) sampled within their bounds, integrated over a random propagation
+              time t ∈ [0, T_prop]. Avoids solving the two-point boundary value problem entirely.</p>
           </div>
           <div class="pipe-step">
             <div class="pipe-num">03</div>
-            <h4>Monte Carlo Propagate</h4>
-            <p>Apply random control inputs (yaw rate, pitch rate, linear acc) integrated over a random time t ∈ [0,
-              T_prop].</p>
+            <h4>State Validity + Collision</h4>
+            <p>Verify every integration step stays inside the bounding mesh and respects pitch/velocity limits. Then
+              check each trajectory point against the environment via sphere proxy collision in trimesh.</p>
           </div>
           <div class="pipe-step">
             <div class="pipe-num">04</div>
-            <h4>Prune &amp; Witness</h4>
-            <p>Check if the new node beats its witness region representative. If so, demote the old node to the inactive
-              set.</p>
+            <h4>Witness &amp; Prune</h4>
+            <p>Check if x_new beats its witness region representative. If so, demote x_peer to inactive and prune leaf
+              nodes up the chain — keeping the tree sparse and near-optimal.</p>
           </div>
         </div>
       </section>
@@ -363,92 +368,147 @@
           <h2>Drone Dynamics Model</h2>
         </div>
         <p style="color:var(--muted); max-width:68ch; margin: 0 0 12px;">
-          Trajectories are forward-integrated using a 6-DOF nonlinear drone model with coupled pitch, yaw, and velocity
-          states.
-          The equations of motion are solved with <code>scipy.odeint</code> at each propagation step.
+          The drone uses the same 6-DOF nonlinear model from the course mini-project. Trajectories are
+          forward-integrated with <code>scipy.odeint</code> over 10 steps per propagation. Pitch is bounded to ±π/3 and
+          velocity to ±1 m/s to keep the system stable in flight.
         </p>
         <div class="algo-block">
           <pre><span class="comment"># Drone equations of motion (odeint integration)</span>
-
-
 <span class="keyword">def</span> <span class="fn">dXdt</span>(X, t):
     x, y, z, yaw, theta, v = X
     <span class="keyword">return</span> [
-    v * cos(yaw) * cos(theta),   <span class="comment"># ẋ</span>
-    v * sin(yaw) * cos(theta),   <span class="comment"># ẏ</span>
-    v * sin(theta),              <span class="comment"># ż</span>
-    omega,                       <span class="comment"># ψ̇  (yaw rate control)</span>
-    alpha,                       <span class="comment"># θ̇  (pitch rate control)</span>
-    acc                          <span class="comment"># v̇  (linear acceleration control)</span>
+        v * cos(yaw) * cos(theta),   <span class="comment"># ẋ</span>
+        v * sin(yaw) * cos(theta),   <span class="comment"># ẏ</span>
+        v * sin(theta),              <span class="comment"># ż</span>
+        omega,                       <span class="comment"># ψ̇  (yaw rate control)</span>
+        alpha,                       <span class="comment"># θ̇  (pitch rate control)</span>
+        acc                          <span class="comment"># v̇  (linear acceleration control)</span>
     ]
-
+ 
 <span class="comment"># Propagate over random time t ∈ [0, T_prop=8s], 10 integration steps</span>
 t = np.linspace(<span class="num">0</span>, t_sampled, <span class="num">10</span>)
 sol = odeint(dXdt, x_0, t)</pre>
         </div>
       </section>
 
-
       <hr class="section-divider" />
 
-      <!-- ── COLLISION DETECTION ── -->
+      <!-- ── ENVIRONMENT & ROBOT ── -->
       <section class="section">
         <div class="section-head">
-          <h2>Mesh Collision Detection</h2>
+          <h2>Environment, Robot &amp; Collision Detection</h2>
         </div>
         <div class="cards">
           <div class="card">
             <div class="card-top">
-              <h3>Environment Mesh</h3>
-              <span class="pill">STL</span>
+              <h3>Unreal Engine 5 Environment</h3>
+              <span class="pill">STL / OBJ</span>
             </div>
-            <p>The forestry scene is loaded as a full STL mesh (<code>FlatSlopes_WithTrees.stl</code>). A persistent
-              <code>trimesh.CollisionManager</code> is initialized once at startup and reused across all 10,000
-              iterations for efficiency.
-            </p>
+            <p>LIDAR data for backcountry slopes proved unavailable online, so the environment was built from scratch in
+              Unreal Engine 5 using Megascans tree assets. A flat landscape with dense foliage was exported through
+              Blender as STL and OBJ files. A matching bounding volume mesh was also created in Blender to constrain
+              state sampling.</p>
           </div>
           <div class="card">
             <div class="card-top">
-              <h3>Sphere Proxy Checking</h3>
-              <span class="pill">Per Trajectory</span>
+              <h3>Drone as a Generalized Sphere</h3>
+              <span class="pill">Quadrotor</span>
             </div>
-            <p>At each integration step along a candidate trajectory, an icosphere of radius = drone max dimension / 2
-              is placed at that position and tested for internal collision against the environment geometry.</p>
+            <p>The drone model (a quadrotor pulled from GrabCad, designed by Logesh Kumar P) is generalized to a sphere
+              using its maximum bounding dimension as the diameter. This accounts for all possible orientations and
+              avoids complex transform math — placing icospheres at trajectory sample points instead of transforming the
+              full mesh.</p>
           </div>
           <div class="card">
             <div class="card-top">
-              <h3>Bounding Volume</h3>
-              <span class="pill">State Validity</span>
+              <h3>Collision Checking</h3>
+              <span class="pill">Per Trajectory Step</span>
             </div>
-            <p>A separate bounding volume mesh (<code>FlatSlopes_BoundingVolume.stl</code>) constrains all sampled
-              states. Only states inside this volume are valid — enforced with <code>trimesh.sample.volume_mesh</code>.
-            </p>
+            <p>A persistent <code>trimesh.CollisionManager</code> holds the environment mesh throughout the run. At each
+              integration step along a candidate trajectory, a sphere of radius = drone max dimension / 2 is added,
+              tested for internal collision, then removed. State validity (pitch, velocity, bounding volume) is checked
+              first to short-circuit before the costlier collision check.</p>
           </div>
         </div>
       </section>
 
       <hr class="section-divider" />
 
-      <!-- ── SUPPORT / ABOUT ── -->
-      <section class="support">
-        <div class="support-inner">
-          <h2>About This Project</h2>
-          <p>
-            Originally developed as the final project for <strong>Advanced Motion Planning</strong> at CU Boulder (Dec
-            2022).
-            The goal was to plan collision-free, dynamically-feasible drone trajectories through a dense forestry
-            environment
-            to follow a snowboarder. The codebase was later cleaned up and expanded with a modular SST class,
-            improved pruning, and a <code>SceneBuilder</code> utility for exporting trajectory point clouds as STL
-            files.
-          </p>
-          <div class="cta-row">
-            <a href="https://github.com" class="btn">GitHub Repository</a>
-            <a href="../assets/McGrawMatthew_FinalReport_Revised.pdf" class="btn btn-ghost">Final Report (PDF)</a>
+      <!-- ── RESULTS ── -->
+      <section class="section">
+        <div class="section-head">
+          <h2>Results &amp; Parameter Tuning</h2>
+        </div>
+        <p style="color:var(--muted); max-width:68ch; margin: 0 0 14px;">
+          The non-dynamic baseline planner reached the goal state in 30 seconds to 2 minutes. Adding full drone dynamics
+          drastically increased planning time — the same parameters that took 2 minutes now took 10+ minutes, and the
+          tree barely left the starting area.
+        </p>
+        <div class="cards" style="grid-template-columns: repeat(3,1fr);">
+          <div class="card">
+            <div class="card-top">
+              <h3>Attempt 1</h3>
+              <span class="pill">Barely leaves start</span>
+            </div>
+            <p>Initial dynamic run with δ_s = 0.8, δ_BN = 1, T_prop = 3, N = 2000. The drone was barely able to leave
+              the starting area — far below expectations.</p>
+            <div class="card-meta"><span>~2–10 min runtime</span></div>
+          </div>
+          <div class="card">
+            <div class="card-top">
+              <h3>Attempt 2</h3>
+              <span class="pill">Leaves start, not goal</span>
+            </div>
+            <p>Nearly doubled all parameters: δ_s = 1.5, δ_BN = 2, T_prop = 8, N = 5000. The drone finally left the
+              starting area but didn't get close to the goal. Tightened yaw/pitch bounds to ±π/12 and acceleration to
+              ±0.35 — runtime dropped back to ~2 min.</p>
+            <div class="card-meta"><span>~2 min runtime</span></div>
+          </div>
+          <div class="card">
+            <div class="card-top">
+              <h3>Attempt 3</h3>
+              <span class="pill">~3 GB output mesh</span>
+            </div>
+            <p>N = 50,000 with goal-bias raised to 25%. The output tree was so large (~3 GB) it couldn't be rendered in
+              Python — each sphere had to be exported as a separate STL and assembled in Blender. Still didn't reach the
+              goal, but foliage wasn't blocking completion — more iterations would have gotten there.</p>
+            <div class="card-meta"><span>&gt;1 hour runtime</span></div>
           </div>
         </div>
       </section>
 
+      <hr class="section-divider" />
+
+      <!-- ── DISCUSSION ── -->
+      <section class="section">
+        <div class="section-head">
+          <h2>Discussion &amp; Future Work</h2>
+        </div>
+        <div class="support-inner">
+          <p>
+            The core challenge is that kinodynamic planning for a drone in a densely obstructed environment is genuinely
+            hard. The random control propagation used by SST generates many trajectories that fail state validity or
+            collision checks before a usable branch is added to the tree — and each failed candidate still costs
+            integration time.
+          </p>
+          <p>
+            A few directions to explore going forward: starting with sparser foliage to establish a working baseline and
+            scaling up density; replacing Monte Carlo propagation with a more targeted control strategy to avoid solving
+            two-point BVPs; and testing whether a more accurate drone dynamic model would improve tree growth. It's also
+            worth exploring the C++ OMPL implementation of SST to compare performance.
+          </p>
+          <p>
+            Despite not reaching the final goal, building the SST planner from scratch — including the
+            Best_First_Selection, MonteCarlo_Prop, Is_Node_Locally_the_Best, and Prune_Dominated_Nodes algorithms — and
+            integrating it with a full 3D mesh collision pipeline was a significant achievement. The plan is to continue
+            this work and eventually build it into a more user-friendly Python motion planning library.
+          </p>
+          <div class="cta-row">
+            <a href="https://github.com" class="btn">View on GitHub</a>
+            <a href="../assets/McGrawMatthew_FinalReport_Revised.pdf" class="btn btn-ghost">Final Report (PDF)</a>
+          </div>
+        </div>
+      </section>
 
     </div><!-- /.container -->
   </main>

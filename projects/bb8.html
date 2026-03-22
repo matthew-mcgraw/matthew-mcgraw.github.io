@@ -83,12 +83,12 @@
             <div class="card-top">
               <div>
                 <p class="stage-label">Stage 01</p>
-                <h3>Go Fast</h3>
+                <h3>Move Forward</h3>
               </div>
               <span class="pill">SP1</span>
             </div>
 
-            <div class="video-slot" id="slot1" onclick="triggerUpload('slot1','file1')">
+<!--             <div class="video-slot" id="slot1" onclick="triggerUpload('slot1','file1')">
               <div class="play-btn">
                 <svg width="12" height="14" viewBox="0 0 12 14" fill="white">
                   <path d="M0 0l12 7-12 7z" />
@@ -96,14 +96,14 @@
               </div>
               <span class="video-hint">Drop or click to add video</span>
               <input type="file" id="file1" accept="video/*" style="display:none" onchange="loadVideo(this,'slot1')">
-            </div>
+            </div> -->
 
             <p class="field-label">Goal</p>
             <p>Drive BB-8 as far from the center of the arena as possible, as fast as possible.</p>
 
             <p class="field-label" style="margin-top:12px">How it was achieved</p>
             <p>The robot observes its x/y position and body rotation — 6 values. Each step, reward is proportional to
-              distance from center. The agent learns to fling itself outward by coordinating pitch and yaw bursts.
+              distance from center. The agent learns to drive itself outward by coordinating pitch and yaw bursts.
               Trains with a compact 2-layer network and converges in a few hundred episodes.</p>
 
             <div class="card-meta">
@@ -120,7 +120,7 @@
             <div class="card-top">
               <div>
                 <p class="stage-label">Stage 02</p>
-                <h3>Go Around Obstacle</h3>
+                <h3>Move Around Obstacle</h3>
               </div>
               <span class="pill">SP2</span>
             </div>
@@ -130,7 +130,7 @@
             </div>
 
             <p class="field-label">Goal</p>
-            <p>Navigate counter-clockwise around a box obstacle, through four checkpoints, into a goal zone — without
+            <p>Navigate around a box obstacle into a goal zone — without
               hitting the walls or obstacle.</p>
 
             <p class="field-label" style="margin-top:12px">How it was achieved</p>
@@ -163,7 +163,7 @@
 
 
             <p class="field-label">Goal</p>
-            <p>Drive BB-8 along a narrow ramp and execute a timed jump to pass through a hoop at the far end.</p>
+            <p>Drive BB-8 along a narrow hall and execute a timed jump to pass through a hoop at the far end.</p>
 
             <p class="field-label" style="margin-top:12px">How it was achieved</p>
             <p>Adds a jump action (upward impulse force) and expands observations to 17 values — including z-height,
