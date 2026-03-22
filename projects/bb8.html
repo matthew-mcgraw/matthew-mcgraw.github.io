@@ -1,255 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BB-8 STUNTS</title>
-<link rel="stylesheet" href="../style.css">
-<link rel="stylesheet" href="../css/bb8.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BB-8 STUNTS</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../css/bb8.css">
 </head>
+
 <body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">Matthew McGraw</a>
 
-<a class="skip-link" href="#main">Skip to content</a>
+      <nav class="nav">
+        <a href="/" aria-current="page">Home</a>
+        <a href="projects.html">Projects</a>
+      </nav>
 
-<!-- Header -->
-<header class="site-header">
-  <div class="header-inner container">
-    <span class="brand">BB-8 STUNTS</span>
-    <nav class="nav">
-      <a href="#stage1">Go Fast</a>
-      <a href="#stage2">Go Around Obstacle</a>
-      <a href="#stage3">Jump Through Hoop</a>
-    </nav>
+      <div class="social">
+        <!-- Replace hrefs with yours -->
+        <a class="icon-btn" href="https://www.linkedin.com/in/matthew-sm-mcgraw/" target="_blank" rel="noreferrer"
+          aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3.5 9h3v12h-3V9Zm7 0h2.9v1.64h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.6V21h-3v-6.2c0-1.48-.03-3.38-2.06-3.38-2.06 0-2.38 1.6-2.38 3.27V21h-3V9Z" />
+          </svg>
+        </a>
+        <!-- GitHub icon -->
+        <a href="https://github.com/matthew-mcgraw" class="icon-btn" aria-label="GitHub" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+          </svg>
+        </a>
 
-  </div>
-</header>
+      </div>
+    </div>
+  </header>
 
-    <header class="site-header">
-        <div class="header-inner container">
-            <div class="brand">Matthew McGraw</div>
-            <nav class="nav">
-                <a href="../index.html">Home</a>
-                <!-- aria-current="page" applies the active style from your CSS [1] -->
-                <a href="../projects.html" aria-current="page">Projects</a>
-            </nav>
-        </div>
-    </header>
+  <main id="main">
 
-<main id="main">
-
-  <!-- Hero -->
-  <div class="hero">
-    <div class="container">
-      <div class="hero-inner">
+    <!-- Hero -->
+    <div class="hero">
+      <div class="container">
+        <div class="hero-inner">
 
           <div class="video-slot" id="slot0">
-            <video
-              src="../assets/SP2_GoAroundObstacle_01 .mov"
-              autoplay
-              loop
-              muted
-              playsinline
-            ></video>
+            <video src="../assets/SP2_GoAroundObstacle_01 .mov" autoplay loop muted playsinline></video>
           </div>
 
-        <div class="hero-copy">
-          <p class="kicker">Deep Reinforcement Learning · Webots · CU Boulder 2023</p>
-          <h1>Teaching BB-8 to do stunts</h1>
-          <p class="lede">Three progressively harder tasks for a Sphero BB-8 robot, trained from scratch using Proximal Policy Optimization inside the Webots physics simulator.</p>
-          <p class="lede">Each stage expands the robot's observation space, action space, and the complexity of what it needs to learn — from simple speed to obstacle avoidance to a timed mid-air jump.</p>
+          <div class="hero-copy">
+            <p class="kicker">Deep Reinforcement Learning · Webots · CU Boulder 2023</p>
+            <h1>Teaching BB-8 to do stunts</h1>
+            <p class="lede">Three progressively harder tasks for a Sphero BB-8 robot, trained from scratch using
+              Proximal Policy Optimization inside the Webots physics simulator.</p>
+            <p class="lede">Each stage expands the robot's observation space, action space, and the complexity of what
+              it needs to learn — from simple speed to obstacle avoidance to a timed mid-air jump.</p>
+            <div class="cta-row">
+              <a href="https://github.com/matthew-mcgraw/BB-8_STUNTS" class="btn" target="_blank">GitHub</a>
+              <a href="#stage1" class="btn btn-ghost">See the stages ↓</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Stages -->
+    <div class="section">
+      <div class="container">
+
+        <div class="section-head">
+          <h2>The Stages</h2>
+        </div>
+
+        <div class="cards">
+
+          <!-- Stage 1 -->
+          <div class="card" id="stage1">
+            <div class="card-top">
+              <div>
+                <p class="stage-label">Stage 01</p>
+                <h3>Go Fast</h3>
+              </div>
+              <span class="pill">SP1</span>
+            </div>
+
+            <div class="video-slot" id="slot1" onclick="triggerUpload('slot1','file1')">
+              <div class="play-btn">
+                <svg width="12" height="14" viewBox="0 0 12 14" fill="white">
+                  <path d="M0 0l12 7-12 7z" />
+                </svg>
+              </div>
+              <span class="video-hint">Drop or click to add video</span>
+              <input type="file" id="file1" accept="video/*" style="display:none" onchange="loadVideo(this,'slot1')">
+            </div>
+
+            <p class="field-label">Goal</p>
+            <p>Drive BB-8 as far from the center of the arena as possible, as fast as possible.</p>
+
+            <p class="field-label" style="margin-top:12px">How it was achieved</p>
+            <p>The robot observes its x/y position and body rotation — 6 values. Each step, reward is proportional to
+              distance from center. The agent learns to fling itself outward by coordinating pitch and yaw bursts.
+              Trains with a compact 2-layer network and converges in a few hundred episodes.</p>
+
+            <div class="card-meta">
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <span class="pill">6 obs</span>
+                <span class="pill">5 actions</span>
+                <span class="pill">2-layer</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 2 -->
+          <div class="card" id="stage2">
+            <div class="card-top">
+              <div>
+                <p class="stage-label">Stage 02</p>
+                <h3>Go Around Obstacle</h3>
+              </div>
+              <span class="pill">SP2</span>
+            </div>
+
+            <div class="video-slot" id="slot0">
+              <video src="../assets/SP1_FindGoal - Type2 - 01.mov" autoplay loop muted playsinline></video>
+            </div>
+
+            <p class="field-label">Goal</p>
+            <p>Navigate counter-clockwise around a box obstacle, through four checkpoints, into a goal zone — without
+              hitting the walls or obstacle.</p>
+
+            <p class="field-label" style="margin-top:12px">How it was achieved</p>
+            <p>Observation expands to 14 values: position, rotation, wall distances, and checkpoint flags. A shaped
+              reward pulls the agent toward each successive waypoint, with bonuses at each gate and a lap-completion
+              reward. A larger 3-layer / 128-unit network handles the more complex path.</p>
+
+            <div class="card-meta">
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <span class="pill">14 obs</span>
+                <span class="pill">4 actions</span>
+                <span class="pill">3-layer · 128u</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 3 -->
+          <div class="card" id="stage3">
+            <div class="card-top">
+              <div>
+                <p class="stage-label">Stage 03</p>
+                <h3>Jump Through Hoop</h3>
+              </div>
+              <span class="pill">SP3</span>
+            </div>
+
+            <div class="video-slot" id="slot3">
+              <video src="../assets/SP3_JumpThroughHoop_01_Trim.mp4" autoplay loop muted playsinline></video>
+            </div>
+
+
+            <p class="field-label">Goal</p>
+            <p>Drive BB-8 along a narrow ramp and execute a timed jump to pass through a hoop at the far end.</p>
+
+            <p class="field-label" style="margin-top:12px">How it was achieved</p>
+            <p>Adds a jump action (upward impulse force) and expands observations to 17 values — including z-height,
+              gyroscope, and accelerometer so the agent senses when it's airborne. The reward shapes forward progress.
+              Jump timing is the critical challenge, discovered through thousands of trial-and-error episodes.</p>
+
+            <div class="card-meta">
+              <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                <span class="pill">17 obs</span>
+                <span class="pill">5 actions</span>
+                <span class="pill">Gyro + Accel</span>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- .cards -->
+
+      </div>
+    </div>
+
+    <!-- Built with -->
+    <div class="support">
+      <div class="container">
+        <div class="support-inner">
+          <h2>Built with</h2>
+          <p>Webots 2023 physics simulator · Deepbots (Gym-compatible Webots wrapper) · PyTorch · TensorBoard · Python
+            3.10</p>
           <div class="cta-row">
-            <a href="https://github.com/matthew-mcgraw/BB-8_STUNTS" class="btn" target="_blank">GitHub</a>
-            <a href="#stage1" class="btn btn-ghost">See the stages ↓</a>
+            <a href="https://cyberbotics.com" class="btn btn-ghost" target="_blank">Webots</a>
+            <a href="https://github.com/aidudezzz/deepbots" class="btn btn-ghost" target="_blank">Deepbots</a>
+            <a href="https://arxiv.org/abs/1707.06347" class="btn btn-ghost" target="_blank">PPO Paper</a>
           </div>
         </div>
-
       </div>
     </div>
-  </div>
 
-  <!-- Stages -->
-  <div class="section">
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
     <div class="container">
-
-      <div class="section-head">
-        <h2>The Stages</h2>
+      <div class="footer-inner">
+        <div>
+          <p class="footer-title">BB-8 STUNTS</p>
+          <p class="footer-sub">Decision Making under Uncertainty · CU Boulder · Spring 2023</p>
+        </div>
+        <div class="footer-right">
+          <div class="footer-links">
+            <a href="https://github.com/matthew-mcgraw/BB-8_STUNTS">GitHub</a>
+            <a href="https://arxiv.org/abs/1707.06347">PPO Paper</a>
+            <a href="https://cyberbotics.com">Webots</a>
+            <a href="https://github.com/aidudezzz/deepbots">Deepbots</a>
+          </div>
+        </div>
       </div>
-
-      <div class="cards">
-
-        <!-- Stage 1 -->
-        <div class="card" id="stage1">
-          <div class="card-top">
-            <div>
-              <p class="stage-label">Stage 01</p>
-              <h3>Go Fast</h3>
-            </div>
-            <span class="pill">SP1</span>
-          </div>
-
-          <div class="video-slot" id="slot1" onclick="triggerUpload('slot1','file1')">
-            <div class="play-btn">
-              <svg width="12" height="14" viewBox="0 0 12 14" fill="white"><path d="M0 0l12 7-12 7z"/></svg>
-            </div>
-            <span class="video-hint">Drop or click to add video</span>
-            <input type="file" id="file1" accept="video/*" style="display:none" onchange="loadVideo(this,'slot1')">
-          </div>
-
-          <p class="field-label">Goal</p>
-          <p>Drive BB-8 as far from the center of the arena as possible, as fast as possible.</p>
-
-          <p class="field-label" style="margin-top:12px">How it was achieved</p>
-          <p>The robot observes its x/y position and body rotation — 6 values. Each step, reward is proportional to distance from center. The agent learns to fling itself outward by coordinating pitch and yaw bursts. Trains with a compact 2-layer network and converges in a few hundred episodes.</p>
-
-          <div class="card-meta">
-            <div style="display:flex; gap:6px; flex-wrap:wrap;">
-              <span class="pill">6 obs</span>
-              <span class="pill">5 actions</span>
-              <span class="pill">2-layer</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Stage 2 -->
-        <div class="card" id="stage2">
-          <div class="card-top">
-            <div>
-              <p class="stage-label">Stage 02</p>
-              <h3>Go Around Obstacle</h3>
-            </div>
-            <span class="pill">SP2</span>
-          </div>
-
-          <div class="video-slot" id="slot0">
-            <video
-              src="../assets/SP1_FindGoal - Type2 - 01.mov"
-              autoplay
-              loop
-              muted
-              playsinline
-            ></video>
-          </div>
-
-          <p class="field-label">Goal</p>
-          <p>Navigate counter-clockwise around a box obstacle, through four checkpoints, into a goal zone — without hitting the walls or obstacle.</p>
-
-          <p class="field-label" style="margin-top:12px">How it was achieved</p>
-          <p>Observation expands to 14 values: position, rotation, wall distances, and checkpoint flags. A shaped reward pulls the agent toward each successive waypoint, with bonuses at each gate and a lap-completion reward. A larger 3-layer / 128-unit network handles the more complex path.</p>
-
-          <div class="card-meta">
-            <div style="display:flex; gap:6px; flex-wrap:wrap;">
-              <span class="pill">14 obs</span>
-              <span class="pill">4 actions</span>
-              <span class="pill">3-layer · 128u</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Stage 3 -->
-        <div class="card" id="stage3">
-          <div class="card-top">
-            <div>
-              <p class="stage-label">Stage 03</p>
-              <h3>Jump Through Hoop</h3>
-            </div>
-            <span class="pill">SP3</span>
-          </div>
-
-          <div class="video-slot" id="slot3">
-            <video
-              src="../assets/SP3_JumpThroughHoop_01_Trim.mp4"
-              autoplay
-              loop
-              muted
-              playsinline
-            ></video>
-          </div>
-
-
-          <p class="field-label">Goal</p>
-          <p>Drive BB-8 along a narrow ramp and execute a timed jump to pass through a hoop at the far end.</p>
-
-          <p class="field-label" style="margin-top:12px">How it was achieved</p>
-          <p>Adds a jump action (upward impulse force) and expands observations to 17 values — including z-height, gyroscope, and accelerometer so the agent senses when it's airborne. The reward shapes forward progress. Jump timing is the critical challenge, discovered through thousands of trial-and-error episodes.</p>
-
-          <div class="card-meta">
-            <div style="display:flex; gap:6px; flex-wrap:wrap;">
-              <span class="pill">17 obs</span>
-              <span class="pill">5 actions</span>
-              <span class="pill">Gyro + Accel</span>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- .cards -->
-
+      <p class="footer-bottom">PPO adapted from Deepbots · Schulman et al., Proximal Policy Optimization Algorithms
+        (2017)</p>
     </div>
-  </div>
+  </footer>
 
-  <!-- Built with -->
-  <div class="support">
-    <div class="container">
-      <div class="support-inner">
-        <h2>Built with</h2>
-        <p>Webots 2023 physics simulator · Deepbots (Gym-compatible Webots wrapper) · PyTorch · TensorBoard · Python 3.10</p>
-        <div class="cta-row">
-          <a href="https://cyberbotics.com" class="btn btn-ghost" target="_blank">Webots</a>
-          <a href="https://github.com/aidudezzz/deepbots" class="btn btn-ghost" target="_blank">Deepbots</a>
-          <a href="https://arxiv.org/abs/1707.06347" class="btn btn-ghost" target="_blank">PPO Paper</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <script>
+    function triggerUpload(slotId, fileId) {
+      if (document.getElementById(slotId).querySelector('video')) return;
+      document.getElementById(fileId).click();
+    }
 
-</main>
+    function loadVideo(input, slotId) {
+      const file = input.files[0];
+      if (!file) return;
+      const slot = document.getElementById(slotId);
+      slot.innerHTML = `<video src="${URL.createObjectURL(file)}" controls playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>`;
+    }
 
-<!-- Footer -->
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-inner">
-      <div>
-        <p class="footer-title">BB-8 STUNTS</p>
-        <p class="footer-sub">Decision Making under Uncertainty · CU Boulder · Spring 2023</p>
-      </div>
-      <div class="footer-right">
-        <div class="footer-links">
-          <a href="https://github.com/matthew-mcgraw/BB-8_STUNTS">GitHub</a>
-          <a href="https://arxiv.org/abs/1707.06347">PPO Paper</a>
-          <a href="https://cyberbotics.com">Webots</a>
-          <a href="https://github.com/aidudezzz/deepbots">Deepbots</a>
-        </div>
-      </div>
-    </div>
-    <p class="footer-bottom">PPO adapted from Deepbots · Schulman et al., Proximal Policy Optimization Algorithms (2017)</p>
-  </div>
-</footer>
-
-<script>
-  function triggerUpload(slotId, fileId) {
-    if (document.getElementById(slotId).querySelector('video')) return;
-    document.getElementById(fileId).click();
-  }
-
-  function loadVideo(input, slotId) {
-    const file = input.files[0];
-    if (!file) return;
-    const slot = document.getElementById(slotId);
-    slot.innerHTML = `<video src="${URL.createObjectURL(file)}" controls playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>`;
-  }
-
-  document.querySelectorAll('.video-slot').forEach(slot => {
-    slot.addEventListener('dragover', e => { e.preventDefault(); slot.style.opacity = '.7'; });
-    slot.addEventListener('dragleave', () => slot.style.opacity = '1');
-    slot.addEventListener('drop', e => {
-      e.preventDefault();
-      slot.style.opacity = '1';
-      const file = e.dataTransfer.files[0];
-      if (file && file.type.startsWith('video/')) {
-        slot.innerHTML = `<video src="${URL.createObjectURL(file)}" controls playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>`;
-      }
+    document.querySelectorAll('.video-slot').forEach(slot => {
+      slot.addEventListener('dragover', e => { e.preventDefault(); slot.style.opacity = '.7'; });
+      slot.addEventListener('dragleave', () => slot.style.opacity = '1');
+      slot.addEventListener('drop', e => {
+        e.preventDefault();
+        slot.style.opacity = '1';
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('video/')) {
+          slot.innerHTML = `<video src="${URL.createObjectURL(file)}" controls playsinline style="width:100%;height:100%;object-fit:cover;display:block;"></video>`;
+        }
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
+
 </html>
