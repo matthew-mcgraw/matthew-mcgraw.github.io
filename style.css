@@ -1,231 +1,408 @@
-:root{
-  --bg:#fbfaf7;
-  --ink:#121316;
-  --muted:#5a606b;
-  --line:#e5e2da;
-  --card:#ffffff;
-  --shadow: 0 12px 30px rgba(0,0,0,.07);
-  --radius: 18px;
+/*
+ * style.css — Base stylesheet
+ * ─────────────────────────────────────────────────────────────
+ * Shared across every page on the site. Contains design tokens,
+ * resets, layout primitives, and all reusable components.
+ *
+ * Each project page has its own companion stylesheet for styles
+ * that are unique to that page:
+ *   css/drone_mp.css   — Drone Motion Planning page
+ *   css/dl_racebot.css — DL RaceBot page
+ *   css/bb8.css        — BB-8 Stunts page
+ *
+ * Load order in each project page's <head>:
+ *   <link rel="stylesheet" href="../style.css">
+ *   <link rel="stylesheet" href="../css/[page].css">
+ * ─────────────────────────────────────────────────────────────
+ */
+
+
+/* ─────────────────────────────────────────────────────────────
+   DESIGN TOKENS
+   Global CSS custom properties (variables). Every colour, shadow,
+   and radius in the site references these — change a value here
+   and it updates everywhere automatically.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --bg:     #fbfaf7;                       /* off-white page background */
+  --ink:    #121316;                       /* near-black for text and filled buttons */
+  --muted:  #5a606b;                       /* secondary text, labels, meta info */
+  --line:   #e5e2da;                       /* borders and dividers */
+  --card:   #ffffff;                       /* card / surface background */
+  --shadow: 0 12px 30px rgba(0,0,0,.07);  /* standard elevation shadow */
+  --radius: 18px;                          /* default border-radius for cards/media */
 }
 
-*{ box-sizing:border-box; }
-html,body{ margin:0; padding:0; }
-body{
-  font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  color:var(--ink);
-  background:var(--bg);
+
+/* ─────────────────────────────────────────────────────────────
+   RESET & BASE
+   Minimal reset so browsers render consistently. box-sizing is
+   set globally so padding never unexpectedly expands elements.
+   ───────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-a{ color:inherit; text-decoration:none; }
-img{ max-width:100%; display:block; }
-
-.container{
-  width:min(1040px, 100%);
-  margin:0 auto;
-  padding:0 20px;
+html, body {
+  margin: 0;
+  padding: 0;
 }
 
-.skip-link{
-  position:absolute;
-  left:-999px;
-  top:10px;
-  background:var(--ink);
-  color:#fff;
-  padding:10px 12px;
-  border-radius:10px;
+body {
+  /* System font stack — uses the OS's native sans-serif for speed
+     and a familiar feel. Line-height 1.6 keeps body text readable. */
+  font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+        Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--ink);
+  background: var(--bg);
 }
-.skip-link:focus{ left:10px; z-index:999; }
 
-.site-header{
-  position:sticky;
-  top:0;
-  z-index:50;
-  background: rgba(251,250,247,.86);
-  backdrop-filter: blur(10px);
+/* Links inherit the surrounding text colour so they don't visually
+   interrupt prose. Underlines are added where needed via specific
+   component styles such as .text-link below. */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Images are block-level and constrained to their container so they
+   never overflow on small screens. */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   LAYOUT — CONTAINER
+   Single max-width wrapper used on every page. min() ensures it
+   never exceeds 1040px on wide screens but fills 100% on mobile.
+   The 20px horizontal padding keeps content off the screen edge.
+   ───────────────────────────────────────────────────────────── */
+.container {
+  width: min(1040px, 100%);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   ACCESSIBILITY — SKIP LINK
+   Hidden off-screen by default; snaps into view on keyboard focus
+   so screen-reader and keyboard-only users can jump straight to
+   main content without tabbing through the entire header.
+   ───────────────────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 10px;
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+.skip-link:focus {
+  left: 10px;
+  z-index: 999;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   HEADER
+   Sticky header that stays at the top of the viewport while
+   scrolling. The semi-transparent background + backdrop-filter
+   creates a frosted-glass effect over the page content below.
+   ───────────────────────────────────────────────────────────── */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;                            /* sits above all page content */
+  background: rgba(251,250,247,.86);      /* --bg at 86% opacity */
+  backdrop-filter: blur(10px);            /* blurs content scrolling underneath */
   border-bottom: 1px solid var(--line);
 }
 
-.header-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  padding:14px 20px;
+/* Flex row: brand on the left, nav in the centre, social on the right */
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 20px;
 }
 
-.brand{
-  font-weight:650;
-  letter-spacing:.2px;
+/* Site name / logo wordmark */
+.brand {
+  font-weight: 650;
+  letter-spacing: .2px;
 }
 
-.nav{
-  display:flex;
-  gap:14px;
-  align-items:center;
-}
-.nav a{
-  padding:8px 10px;
-  border-radius:12px;
-  color:var(--muted);
-}
-.nav a[aria-current="page"]{ color:var(--ink); }
-.nav a:hover{ background:rgba(0,0,0,.04); color:var(--ink); }
 
-.social{
-  display:flex;
-  gap:10px;
-  align-items:center;
+/* ─────────────────────────────────────────────────────────────
+   NAVIGATION
+   Horizontal link row inside the header. The aria-current="page"
+   attribute marks the active link and receives the full --ink
+   colour to indicate which page you are on.
+   ───────────────────────────────────────────────────────────── */
+.nav {
+  display: flex;
+  gap: 14px;
+  align-items: center;
 }
-.icon-btn{
-  width:38px;
-  height:38px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  display:grid;
-  place-items:center;
-  background:var(--card);
+
+.nav a {
+  padding: 8px 10px;
+  border-radius: 12px;
+  color: var(--muted);
 }
-.icon-btn svg{ width:18px; height:18px; fill: currentColor; color: var(--muted); }
-.icon-btn:hover{
+
+.nav a[aria-current="page"] {
+  color: var(--ink);        /* active page link gets full contrast */
+}
+
+.nav a:hover {
+  background: rgba(0,0,0,.04);
+  color: var(--ink);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   SOCIAL ICON BUTTONS
+   Small circular buttons used in the header for GitHub, LinkedIn,
+   etc. The SVG fills with currentColor so the hover state only
+   needs to update the text colour to change the icon tint.
+   ───────────────────────────────────────────────────────────── */
+.social {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 999px;       /* large value guarantees a perfect circle */
+  display: grid;
+  place-items: center;
+  background: var(--card);
+}
+
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  color: var(--muted);
+}
+
+.icon-btn:hover {
   box-shadow: var(--shadow);
   transform: translateY(-1px);
 }
-.icon-btn:hover svg{ color: var(--ink); }
 
-.hero{
-  padding:44px 0 10px;
-}
-.hero-inner{
-  display:grid;
-  grid-template-columns: 320px 1fr;
-  gap:28px;
-  align-items:start;
+.icon-btn:hover svg {
+  color: var(--ink);
 }
 
-.hero-media{
+
+/* ─────────────────────────────────────────────────────────────
+   HERO SECTION
+   Two-column grid: a fixed-width media panel on the left (image
+   or video) and the copy column (headline, description, CTAs) on
+   the right taking the remaining space.
+   ───────────────────────────────────────────────────────────── */
+.hero {
+  padding: 44px 0 10px;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 320px 1fr;  /* left column fixed, right fills space */
+  gap: 28px;
+  align-items: start;
+}
+
+/* The image / video container on the left side of the hero */
+.hero-media {
   border-radius: var(--radius);
-  overflow:hidden;
-  border:1px solid var(--line);
+  overflow: hidden;
+  border: 1px solid var(--line);
   background: var(--card);
   box-shadow: var(--shadow);
 }
-.hero-media img{
-  width:100%;
-  height:auto;
+
+.hero-media img {
+  width: 100%;
+  height: auto;
 }
 
-.hero-copy h1{
-  margin:0 0 6px;
+/* Hero headline — clamp() creates fluid type that scales between
+   36px at narrow viewports and 52px at wide ones. */
+.hero-copy h1 {
+  margin: 0 0 6px;
   font-size: clamp(36px, 5vw, 52px);
-  line-height:1.05;
-  letter-spacing:-.6px;
+  line-height: 1.05;
+  letter-spacing: -.6px;
 }
-.kicker{
-  margin:0 0 18px;
-  color:var(--muted);
-  font-weight:600;
+
+/* Small category / context label that appears above the headline */
+.kicker {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-weight: 600;
 }
-.lede{
+
+/* One or two sentences of intro text below the headline.
+   max-width: 70ch keeps lines at a comfortable reading length. */
+.lede {
   margin: 0 0 14px;
   color: var(--ink);
   max-width: 70ch;
 }
 
-.cta-row{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
+/* Row of call-to-action buttons below the lede */
+.cta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
   margin-top: 18px;
 }
 
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px 14px;
-  border-radius:999px;
-  border:1px solid var(--ink);
+
+/* ─────────────────────────────────────────────────────────────
+   BUTTONS
+   Two variants share the same pill shape (border-radius: 999px)
+   and lift slightly on hover via a translateY transform.
+
+     .btn        — filled dark button, primary action
+     .btn-ghost  — transparent outline button, secondary action
+   ───────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
   background: var(--ink);
   color: #fff;
-  font-weight:650;
+  font-weight: 650;
 }
-.btn:hover{ transform: translateY(-1px); box-shadow: var(--shadow); }
 
-.btn-ghost{
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+
+.btn-ghost {
   background: transparent;
   color: var(--ink);
   border: 1px solid var(--line);
 }
-.btn-ghost:hover{ border-color: var(--ink); }
 
-.section{
+.btn-ghost:hover {
+  border-color: var(--ink);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   SECTION
+   Generic content section with vertical breathing room above and
+   below. .section-head is a flex row with a heading on the left
+   and an optional "see all" link on the right.
+   ───────────────────────────────────────────────────────────── */
+.section {
   padding: 26px 0 18px;
 }
 
-.section-head{
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  gap:16px;
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
   margin-top: 10px;
   margin-bottom: 12px;
 }
 
-h2{
-  margin:0;
+/* Section headings are slightly smaller than a default h2 so they
+   don't compete visually with the hero headline. */
+h2 {
+  margin: 0;
   font-size: 20px;
-  letter-spacing:-.2px;
+  letter-spacing: -.2px;
 }
 
-.text-link{
+/* Inline text link with a transparent underline that animates in
+   on hover, giving a subtle interactive indicator. */
+.text-link {
   color: var(--muted);
   border-bottom: 1px solid transparent;
 }
-.text-link:hover{ color: var(--ink); border-bottom-color: var(--ink); }
 
-.cards{
-  display:grid;
+.text-link:hover {
+  color: var(--ink);
+  border-bottom-color: var(--ink);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   CARDS GRID
+   Three-column responsive grid of cards. Each card is a white
+   surface with a border, a faint bottom shadow at rest, and a
+   more pronounced lift effect on hover.
+   ───────────────────────────────────────────────────────────── */
+.cards {
+  display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap:14px;
+  gap: 14px;
   padding-bottom: 8px;
 }
 
-.card{
+.card {
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 16px;
-  box-shadow: 0 1px 0 rgba(0,0,0,.02);
+  box-shadow: 0 1px 0 rgba(0,0,0,.02);   /* subtle bottom shadow at rest */
 }
-.card:hover{
+
+.card:hover {
   box-shadow: var(--shadow);
   transform: translateY(-1px);
-  border-color: rgba(18,19,22,.18);
+  border-color: rgba(18,19,22,.18);      /* slightly darker border on hover */
 }
-.card-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
+
+/* Top row inside a card: title on the left, pill label on the right */
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
 }
-.card h3{
-  margin:0;
+
+.card h3 {
+  margin: 0;
   font-size: 16px;
-  letter-spacing:-.2px;
+  letter-spacing: -.2px;
 }
-.card p{
-  margin:8px 0 12px;
+
+.card p {
+  margin: 8px 0 12px;
   color: var(--muted);
 }
-.card-meta{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
+
+/* Bottom row of a card: supplementary info like file name or stats */
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   color: var(--muted);
   font-size: 13px;
 }
-.pill{
+
+/* Small rounded tag used to label a card's type or category */
+.pill {
   font-size: 12px;
   color: var(--muted);
   border: 1px solid var(--line);
@@ -234,466 +411,97 @@ h2{
   background: rgba(0,0,0,.02);
 }
 
-.support{
+
+/* ─────────────────────────────────────────────────────────────
+   SUPPORT / ABOUT BLOCK
+   A full-width highlighted panel used for "About this project"
+   or "Built with" sections, typically at the bottom of a page.
+   Slightly more rounded than a standard card to visually
+   distinguish it as a section-level element.
+   ───────────────────────────────────────────────────────────── */
+.support {
   padding-top: 16px;
 }
-.support-inner{
+
+.support-inner {
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: calc(var(--radius) + 6px);
+  border-radius: calc(var(--radius) + 6px);  /* extra rounding vs .card */
   padding: 22px;
   box-shadow: var(--shadow);
 }
-.support-inner p{ color: var(--muted); margin: 8px 0 14px; max-width: 75ch; }
 
-.site-footer{
+.support-inner p {
+  color: var(--muted);
+  margin: 8px 0 14px;
+  max-width: 75ch;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   FOOTER
+   Two-column layout: branding on the left, grouped link columns
+   on the right. flex-wrap allows it to reflow to a single column
+   on narrow screens without a dedicated media query.
+   ───────────────────────────────────────────────────────────── */
+.site-footer {
   margin-top: 30px;
   border-top: 1px solid var(--line);
   padding: 22px 0;
 }
-.footer-inner{
-  display:flex;
-  justify-content:space-between;
-  gap:18px;
-  flex-wrap:wrap;
-}
-.footer-title{ margin:0; font-weight:700; }
-.footer-sub{ margin:6px 0 0; color: var(--muted); }
 
-.footer-right{
-  display:flex;
-  gap:26px;
-  flex-wrap:wrap;
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
 }
-.footer-links{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
+
+.footer-title {
+  margin: 0;
+  font-weight: 700;
+}
+
+.footer-sub {
+  margin: 6px 0 0;
   color: var(--muted);
 }
-.footer-links a:hover{ color: var(--ink); }
 
-.footer-bottom{
+.footer-right {
+  display: flex;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+
+/* A vertical column of footer links, e.g. "Project" or "Contact" */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--muted);
+}
+
+.footer-links a:hover {
+  color: var(--ink);
+}
+
+/* Small copyright / attribution line at the very bottom */
+.footer-bottom {
   margin-top: 18px;
   color: var(--muted);
   font-size: 13px;
 }
 
-/* Responsive */
-@media (max-width: 900px){
-  .hero-inner{ grid-template-columns: 1fr; }
-  .hero-media{ max-width: 420px; }
-  .cards{ grid-template-columns: 1fr; }
-  .nav{ display:none; } /* keeps header clean on mobile like many portfolio templates */
-}
-/* ─── drone_mp.html page-specific styles ─── */
 
-/* Override font vars to use Sora */
-body {
-  font-family: 'Sora', ui-sans-serif, system-ui, sans-serif;
-}
-
-/* ─── Hero visual: animated SVG path diagram ─── */
-.hero-media {
-  position: relative;
-  background: #0d0f14;
-  border-color: #1e2228;
-  min-height: 260px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.hero-media canvas-wrap {
-  display: block;
-  width: 100%;
-}
-
-.sst-diagram {
-  width: 100%;
-  padding: 10px;
-}
-
-/* Animated tree paths */
-.tree-path {
-  stroke-dasharray: 300;
-  stroke-dashoffset: 300;
-  animation: drawPath 2s ease forwards;
-}
-.tree-path:nth-child(2) { animation-delay: 0.2s; }
-.tree-path:nth-child(3) { animation-delay: 0.4s; }
-.tree-path:nth-child(4) { animation-delay: 0.6s; }
-.tree-path:nth-child(5) { animation-delay: 0.8s; }
-
-.drone-dot {
-  animation: pulseDrone 2s ease-in-out infinite;
-}
-
-.goal-ring {
-  animation: pulseGoal 1.8s ease-in-out infinite;
-}
-
-@keyframes drawPath {
-  to { stroke-dashoffset: 0; }
-}
-@keyframes pulseDrone {
-  0%, 100% { r: 5; opacity: 1; }
-  50% { r: 7; opacity: 0.7; }
-}
-@keyframes pulseGoal {
-  0%, 100% { stroke-opacity: 1; }
-  50% { stroke-opacity: 0.3; }
-}
-
-/* ─── Tech chip badges ─── */
-.tech-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 14px;
-}
-
-.chip {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  background: #0d0f14;
-  color: #a8b4c8;
-  border: 1px solid #2a2e38;
-  padding: 4px 10px;
-  border-radius: 6px;
-  letter-spacing: .3px;
-}
-
-/* ─── Algorithm highlight block ─── */
-.algo-block {
-  background: #0d0f14;
-  border: 1px solid #1e2228;
-  border-radius: 14px;
-  padding: 18px 20px;
-  margin: 14px 0;
-}
-
-.algo-block pre {
-  font-family: 'DM Mono', monospace;
-  font-size: 12.5px;
-  color: #7dd3a8;
-  margin: 0;
-  line-height: 1.7;
-  white-space: pre-wrap;
-}
-
-.algo-block .comment { color: #4d566a; }
-.algo-block .keyword { color: #82b4ff; }
-.algo-block .fn { color: #e8a87c; }
-.algo-block .num { color: #c5a5f5; }
-
-/* ─── State space table ─── */
-.state-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13.5px;
-  margin-top: 10px;
-}
-
-.state-table th {
-  font-weight: 600;
-  text-align: left;
-  padding: 8px 12px;
-  border-bottom: 2px solid var(--line);
-  color: var(--muted);
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-}
-
-.state-table td {
-  padding: 9px 12px;
-  border-bottom: 1px solid var(--line);
-  font-family: 'DM Mono', monospace;
-  font-size: 12px;
-}
-
-.state-table tr:last-child td { border-bottom: none; }
-
-.state-table tr:hover td { background: rgba(0,0,0,.02); }
-
-/* ─── Pipeline steps ─── */
-.pipeline {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.pipe-step {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 14px;
-  position: relative;
-}
-
-.pipe-step::after {
-  content: '→';
-  position: absolute;
-  right: -12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--muted);
-  font-size: 14px;
-  z-index: 1;
-}
-
-.pipe-step:last-child::after { display: none; }
-
-.pipe-num {
-  font-family: 'DM Mono', monospace;
-  font-size: 11px;
-  color: var(--muted);
-  margin-bottom: 4px;
-}
-
-.pipe-step h4 {
-  margin: 0 0 4px;
-  font-size: 13px;
-  letter-spacing: -.1px;
-}
-
-.pipe-step p {
-  margin: 0;
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-/* ─── Inline stat pills ─── */
-.stat-row {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin: 14px 0;
-}
-
-.stat-box {
-  flex: 1;
-  min-width: 120px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 12px 14px;
-}
-
-.stat-box .stat-val {
-  font-family: 'DM Mono', monospace;
-  font-size: 22px;
-  font-weight: 500;
-  letter-spacing: -.5px;
-  line-height: 1;
-}
-
-.stat-box .stat-label {
-  font-size: 11.5px;
-  color: var(--muted);
-  margin-top: 4px;
-}
-
-/* ─── Divider ─── */
-.section-divider {
-  border: none;
-  border-top: 1px solid var(--line);
-  margin: 4px 0;
-}
-
+/* ─────────────────────────────────────────────────────────────
+   RESPONSIVE BREAKPOINTS
+   At 900px the hero collapses to a single column, the card grid
+   goes to one column, and the nav is hidden to keep the header
+   uncluttered on mobile (a common portfolio pattern).
+   ───────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .pipeline { grid-template-columns: 1fr 1fr; }
-  .pipe-step::after { display: none; }
-}
-
-@media (max-width: 600px) {
-  .pipeline { grid-template-columns: 1fr; }
-}
-
-/* ─── dl_racebot.html page-specific styles ─── */
-
-.badge{
-  display:inline-flex; align-items:center; gap:6px;
-  font-size:12px; font-weight:600; color:var(--muted);
-  border:1px solid var(--line); padding:4px 10px;
-  border-radius:999px; background:rgba(0,0,0,.02);
-  margin-bottom:12px;
-}
-.badge-dot{
-  width:6px; height:6px; border-radius:50%;
-  background:#22c55e; display:inline-block;
-}
-
-/* Hero visual: animated track SVG */
-.track-visual{
-  aspect-ratio:1/1;
-  display:flex; align-items:center; justify-content:center;
-  padding:24px;
-  background: linear-gradient(135deg, #f5f4f0 0%, #eeece6 100%);
-  position:relative;
-  overflow:hidden;
-}
-.track-visual svg{ width:100%; max-width:280px; }
-.car-dot{
-  animation: drive 3.6s linear infinite;
-  transform-origin: center;
-}
-@keyframes drive{
-  0%   { offset-distance:0%; }
-  100% { offset-distance:100%; }
-}
-
-/* Video slot */
-.video-slot {
-  border-radius: var(--radius);
-  overflow: hidden;
-  border: 1px solid var(--line);
-  background: var(--card);
-  box-shadow: var(--shadow);
-  width: 320px;
-  flex-shrink: 0;
-}
-.video-slot video {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Hero layout override */
-.hero-inner {
-  display: flex;
-  flex-direction: row;
-  gap: 28px;
-  align-items: start;
-}
-
-/* Two-column detail layout */
-.detail-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-@media(max-width:700px){ .detail-grid{ grid-template-columns:1fr; } }
-
-.stat-row{
-  display:flex; align-items:center; gap:10px;
-  padding:10px 0;
-  border-bottom:1px solid var(--line);
-}
-.stat-row:last-child{ border-bottom:none; }
-.stat-label{ color:var(--muted); font-size:14px; flex:1; }
-.stat-val{ font-weight:650; font-size:14px; }
-
-pre{
-  background:var(--ink); color:#e8e6e0;
-  border-radius:var(--radius); padding:18px 20px;
-  font-size:13px; line-height:1.65;
-  overflow-x:auto; margin:0;
-  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
-}
-pre .kw{ color:#93c5fd; }
-pre .fn{ color:#86efac; }
-pre .cm{ color:#6b7280; }
-pre .st{ color:#fcd34d; }
-pre .nu{ color:#f9a8d4; }
-
-.timeline{
-  display:flex; flex-direction:column; gap:0;
-}
-.tl-item{
-  display:grid;
-  grid-template-columns:28px 1fr;
-  gap:14px;
-  padding-bottom:20px;
-  position:relative;
-}
-.tl-item:not(:last-child)::before{
-  content:"";
-  position:absolute;
-  left:13px; top:28px;
-  width:2px; bottom:0;
-  background:var(--line);
-}
-.tl-node{
-  width:28px; height:28px; border-radius:50%;
-  border:2px solid var(--line);
-  background:var(--card);
-  display:grid; place-items:center;
-  font-size:11px; font-weight:700; color:var(--muted);
-  position:relative; z-index:1;
-  flex-shrink:0;
-}
-.tl-node.active{
-  background:var(--ink); border-color:var(--ink); color:#fff;
-}
-.tl-body{ padding-top:4px; }
-.tl-body strong{ display:block; font-size:15px; letter-spacing:-.1px; margin-bottom:2px; }
-.tl-body p{ margin:0; color:var(--muted); font-size:14px; }
-
-.full-card{ grid-column:1 / -1; }
-
-.two-col{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-}
-@media(max-width:700px){ .two-col{ grid-template-columns:1fr; } }
-
-.chip-list{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
-.chip{
-  background:rgba(18,19,22,.05); border:1px solid var(--line);
-  border-radius:999px; padding:4px 12px; font-size:13px;
-}
-
-/* ─── bb8.html page-specific styles ─── */
-
-.video-slot:hover { opacity: 0.85; }
-
-.video-hint {
-  font-size: 12px;
-  color: rgba(255,255,255,0.3);
-  letter-spacing: 0.05em;
-}
-
-.play-btn {
-  width: 42px;
-  height: 42px;
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.stage-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 2px;
-}
-
-.field-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin: 0 0 4px;
-}
-
-.field-label + p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.55;
-}
-
-@media (max-width: 600px) {
-  .two-col { grid-template-columns: 1fr; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-media { max-width: 420px; }
+  .cards      { grid-template-columns: 1fr; }
+  .nav        { display: none; }
 }
