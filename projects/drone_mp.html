@@ -1,327 +1,374 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Drone Motion Planning — Matthew McGraw</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../style.css" >
-  <link rel="stylesheet" href="../css/drone_mp.css" >
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../css/drone_mp.css">
 </head>
+
 <body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/">Matthew McGraw</a>
 
-<a class="skip-link" href="#main">Skip to content</a>
-
-<!-- ── HEADER ── -->
-
-<header class="site-header">
-  <div class="header-inner container">
-    <span class="brand">Matthew McGraw</span>
-      <nav class="nav" aria-label="Main navigation">
-                  <a href="../index.html">Home</a>
-                  <!-- aria-current="page" applies the active style from your CSS [1] -->
-                  <a href="../projects.html" aria-current="page">Projects</a>
+      <nav class="nav">
+        <a href="/" aria-current="page">Home</a>
+        <a href="projects.html">Projects</a>
       </nav>
-    <div class="social">
-      <!-- GitHub icon -->
-      <a href="https://github.com/matthew-mcgraw" class="icon-btn" aria-label="GitHub" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-      </a>
-    </div>
-  </div>
-</header>
 
-<!-- ── MAIN ── -->
+      <div class="social">
+        <!-- Replace hrefs with yours -->
+        <a class="icon-btn" href="https://www.linkedin.com/in/matthew-sm-mcgraw/" target="_blank" rel="noreferrer"
+          aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3.5 9h3v12h-3V9Zm7 0h2.9v1.64h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.6V21h-3v-6.2c0-1.48-.03-3.38-2.06-3.38-2.06 0-2.38 1.6-2.38 3.27V21h-3V9Z" />
+          </svg>
+        </a>
+        <!-- GitHub icon -->
+        <a href="https://github.com/matthew-mcgraw" class="icon-btn" aria-label="GitHub" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+          </svg>
+        </a>
 
-<main id="main">
-  <div class="container">
-
-
-<!-- ── HERO ── -->
-<section class="hero">
-  <div class="hero-inner">
-
-    <!-- SVG visualisation of an SST tree in a 3D env -->
-    <div class="hero-media">
-      <svg class="sst-diagram" viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Ground / terrain shading -->
-        <rect width="320" height="240" fill="#0d0f14"/>
-        <ellipse cx="160" cy="210" rx="160" ry="30" fill="#111418"/>
-
-        <!-- Forest silhouettes -->
-        <g opacity="0.35">
-          <polygon points="30,180 44,140 58,180" fill="#1e2f1e"/>
-          <polygon points="36,180 50,120 64,180" fill="#1a2a1a"/>
-          <polygon points="60,180 76,148 92,180" fill="#1e2f1e"/>
-          <polygon points="68,180 84,128 100,180" fill="#16261a"/>
-          <polygon points="240,180 256,138 272,180" fill="#1e2f1e"/>
-          <polygon points="248,180 264,115 280,180" fill="#1a2a1a"/>
-          <polygon points="270,180 286,148 302,180" fill="#1e2f1e"/>
-        </g>
-
-        <!-- SST tree branches — collision-free paths -->
-        <g stroke="#2c4a6e" stroke-width="1" opacity="0.7">
-          <line class="tree-path" x1="70" y1="180" x2="95" y2="155"/>
-          <line class="tree-path" x1="95" y1="155" x2="125" y2="140"/>
-          <line class="tree-path" x1="95" y1="155" x2="108" y2="125"/>
-          <line class="tree-path" x1="108" y1="125" x2="130" y2="110"/>
-          <line class="tree-path" x1="130" y1="110" x2="155" y2="100"/>
-          <line class="tree-path" x1="125" y1="140" x2="148" y2="120"/>
-          <line class="tree-path" x1="148" y1="120" x2="165" y2="102"/>
-          <line class="tree-path" x1="155" y1="100" x2="180" y2="90"/>
-          <line class="tree-path" x1="180" y1="90" x2="204" y2="85"/>
-          <line class="tree-path" x1="204" y1="85" x2="232" y2="80"/>
-          <!-- pruned / inactive branches -->
-          <line x1="130" y1="110" x2="148" y2="95" stroke="#2c3a52" stroke-dasharray="3 3"/>
-          <line x1="108" y1="125" x2="126" y2="108" stroke="#2c3a52" stroke-dasharray="3 3"/>
-        </g>
-
-        <!-- Best path highlight -->
-        <polyline
-          points="70,180 95,155 108,125 130,110 155,100 180,90 204,85 232,80"
-          stroke="#3b82f6" stroke-width="2" fill="none" opacity="0.9"
-          stroke-dasharray="4 2"/>
-
-        <!-- Witness region circles -->
-        <circle cx="95" cy="155" r="8" stroke="#4b5563" stroke-width="0.8" fill="none" opacity="0.4"/>
-        <circle cx="130" cy="110" r="8" stroke="#4b5563" stroke-width="0.8" fill="none" opacity="0.4"/>
-        <circle cx="180" cy="90" r="8" stroke="#4b5563" stroke-width="0.8" fill="none" opacity="0.4"/>
-        <circle cx="232" cy="80" r="8" stroke="#4b5563" stroke-width="0.8" fill="none" opacity="0.4"/>
-
-        <!-- Start node -->
-        <circle cx="70" cy="180" r="5" fill="#22c55e"/>
-        <text x="62" y="195" fill="#22c55e" font-size="8" font-family="monospace">x₀</text>
-
-        <!-- Drone (current best node) -->
-        <circle class="drone-dot" cx="204" cy="85" r="5" fill="#3b82f6"/>
-        <!-- Drone propeller cross -->
-        <line x1="199" y1="85" x2="209" y2="85" stroke="#93c5fd" stroke-width="1"/>
-        <line x1="204" y1="80" x2="204" y2="90" stroke="#93c5fd" stroke-width="1"/>
-
-        <!-- Goal region -->
-        <circle class="goal-ring" cx="232" cy="80" r="11" stroke="#f59e0b" stroke-width="1.5" fill="none"/>
-        <circle cx="232" cy="80" r="4" fill="#f59e0b" opacity="0.8"/>
-        <text x="242" y="76" fill="#f59e0b" font-size="8" font-family="monospace">goal</text>
-
-        <!-- Labels -->
-        <text x="8" y="12" fill="#4b5563" font-size="9" font-family="monospace">SST* — Dense Forestry</text>
-        <text x="8" y="24" fill="#2d3748" font-size="8" font-family="monospace">N=10,000 iters · δ_s=1.5 · δ_bn=2</text>
-      </svg>
-    </div>
-
-    <!-- Hero copy -->
-    <div class="hero-copy">
-      <p class="kicker">Motion Planning · Robotics · CU Boulder</p>
-      <h1>Drone Motion Planning</h1>
-      <p class="lede">
-        A Python implementation of the SST* (Stable Sparse RRT) motion planning algorithm for navigating
-        a drone through 3D environments — originally built to autonomously follow a snowboarder through dense forestry using dynamically-feasible trajectories.
-      </p>
-      <p class="lede">
-        The system integrates mesh-based collision detection, Monte Carlo propagation, and witness-region pruning to produce
-        sparse yet near-optimal trajectory trees under realistic vehicle dynamics.
-      </p>
-
-      <div class="tech-chips">
-        <span class="chip">Python</span>
-        <span class="chip">trimesh</span>
-        <span class="chip">scipy · odeint</span>
-        <span class="chip">numpy</span>
-        <span class="chip">SST*</span>
-        <span class="chip">STL / OBJ meshes</span>
-        <span class="chip">Collision Detection</span>
-      </div>
-
-      <div class="cta-row">
-        <a href="https://github.com" class="btn">View on GitHub</a>
-        <a href="#algorithm" class="btn btn-ghost">Read the Breakdown ↓</a>
       </div>
     </div>
+  </header>
 
-  </div>
-</section>
+  <!-- ── MAIN ── -->
 
-<hr class="section-divider"/>
+  <main id="main">
+    <div class="container">
 
-<!-- ── STATS ── -->
-<section class="section">
-  <div class="stat-row">
-    <div class="stat-box">
-      <div class="stat-val">10,000</div>
-      <div class="stat-label">SST iterations per run</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-val">6D</div>
-      <div class="stat-label">State space (x, y, z, pitch, yaw, vel)</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-val">3</div>
-      <div class="stat-label">Control inputs (ω, α, a)</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-val">3D STL</div>
-      <div class="stat-label">Mesh-based environment</div>
-    </div>
-  </div>
-</section>
 
-<hr class="section-divider"/>
+      <!-- ── HERO ── -->
+      <section class="hero">
+        <div class="hero-inner">
 
-<!-- ── OVERVIEW CARDS ── -->
-<section class="section" id="algorithm">
-  <div class="section-head">
-    <h2>Project Subproblems</h2>
-  </div>
-  <div class="cards">
+          <!-- SVG visualisation of an SST tree in a 3D env -->
+          <div class="hero-media">
+            <svg class="sst-diagram" viewBox="0 0 320 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Ground / terrain shading -->
+              <rect width="320" height="240" fill="#0d0f14" />
+              <ellipse cx="160" cy="210" rx="160" ry="30" fill="#111418" />
 
-    <div class="card">
-      <div class="card-top">
-        <h3>Subproblem 1 — No Dynamics</h3>
-        <span class="pill">Baseline</span>
-      </div>
-      <p>
-        A kinematic-only planner that navigates the drone through the flat-slope forestry scene.
-        Collision checking is performed by sampling sphere proxies along candidate paths against the environment STL mesh.
-        Serves as the foundation for understanding SST tree growth and pruning.
-      </p>
-      <div class="card-meta">
-        <span>SubProblem1_NoDynamics.py</span>
-        <span>δ_bn = 2 · T_prop = 2s</span>
-      </div>
-    </div>
+              <!-- Forest silhouettes -->
+              <g opacity="0.35">
+                <polygon points="30,180 44,140 58,180" fill="#1e2f1e" />
+                <polygon points="36,180 50,120 64,180" fill="#1a2a1a" />
+                <polygon points="60,180 76,148 92,180" fill="#1e2f1e" />
+                <polygon points="68,180 84,128 100,180" fill="#16261a" />
+                <polygon points="240,180 256,138 272,180" fill="#1e2f1e" />
+                <polygon points="248,180 264,115 280,180" fill="#1a2a1a" />
+                <polygon points="270,180 286,148 302,180" fill="#1e2f1e" />
+              </g>
 
-    <div class="card">
-      <div class="card-top">
-        <h3>Subproblem 1 — With Dynamics</h3>
-        <span class="pill">Full Model</span>
-      </div>
-      <p>
-        Adds a full nonlinear drone dynamic model. Trajectories are integrated using <code>scipy.odeint</code>
-        over randomly sampled propagation times. Pitch and velocity bounds are enforced at every integration step
-        before a new vertex is accepted into the active set.
-      </p>
-      <div class="card-meta">
-        <span>SP1_SST_MOTION_PLANNER-DRONE_IN_DENSE_FORESTRY.py</span>
-      </div>
-    </div>
+              <!-- SST tree branches — collision-free paths -->
+              <g stroke="#2c4a6e" stroke-width="1" opacity="0.7">
+                <line class="tree-path" x1="70" y1="180" x2="95" y2="155" />
+                <line class="tree-path" x1="95" y1="155" x2="125" y2="140" />
+                <line class="tree-path" x1="95" y1="155" x2="108" y2="125" />
+                <line class="tree-path" x1="108" y1="125" x2="130" y2="110" />
+                <line class="tree-path" x1="130" y1="110" x2="155" y2="100" />
+                <line class="tree-path" x1="125" y1="140" x2="148" y2="120" />
+                <line class="tree-path" x1="148" y1="120" x2="165" y2="102" />
+                <line class="tree-path" x1="155" y1="100" x2="180" y2="90" />
+                <line class="tree-path" x1="180" y1="90" x2="204" y2="85" />
+                <line class="tree-path" x1="204" y1="85" x2="232" y2="80" />
+                <!-- pruned / inactive branches -->
+                <line x1="130" y1="110" x2="148" y2="95" stroke="#2c3a52" stroke-dasharray="3 3" />
+                <line x1="108" y1="125" x2="126" y2="108" stroke="#2c3a52" stroke-dasharray="3 3" />
+              </g>
 
-    <div class="card">
-      <div class="card-top">
-        <h3>SST* Core Algorithm</h3>
-        <span class="pill">Algorithm</span>
-      </div>
-      <p>
-        Implements the Stable Sparse Tree planner with best-first node selection, witness regions for pruning
-        dominated vertices, and Monte Carlo random control propagation — yielding
-        sparse, near-asymptotically-optimal path trees.
-      </p>
-      <div class="card-meta">
-        <span>MotionPlanningAlgorithms/SST.py</span>
-        <span>δ_s = 1.5</span>
-      </div>
-    </div>
+              <!-- Best path highlight -->
+              <polyline points="70,180 95,155 108,125 130,110 155,100 180,90 204,85 232,80" stroke="#3b82f6"
+                stroke-width="2" fill="none" opacity="0.9" stroke-dasharray="4 2" />
 
-  </div>
-</section>
+              <!-- Witness region circles -->
+              <circle cx="95" cy="155" r="8" stroke="#4b5563" stroke-width="0.8" fill="none" opacity="0.4" />
+              <circle cx="130" cy="110" r="8" stroke="#4b5563" stroke-width="0.8" fill="none" opacity="0.4" />
+              <circle cx="180" cy="90" r="8" stroke="#4b5563" stroke-width="0.8" fill="none" opacity="0.4" />
+              <circle cx="232" cy="80" r="8" stroke="#4b5563" stroke-width="0.8" fill="none" opacity="0.4" />
 
-<hr class="section-divider"/>
+              <!-- Start node -->
+              <circle cx="70" cy="180" r="5" fill="#22c55e" />
+              <text x="62" y="195" fill="#22c55e" font-size="8" font-family="monospace">x₀</text>
 
-<!-- ── HOW SST WORKS PIPELINE ── -->
-<section class="section">
-  <div class="section-head">
-    <h2>How SST* Works</h2>
-  </div>
+              <!-- Drone (current best node) -->
+              <circle class="drone-dot" cx="204" cy="85" r="5" fill="#3b82f6" />
+              <!-- Drone propeller cross -->
+              <line x1="199" y1="85" x2="209" y2="85" stroke="#93c5fd" stroke-width="1" />
+              <line x1="204" y1="80" x2="204" y2="90" stroke="#93c5fd" stroke-width="1" />
 
-  <div class="pipeline">
-    <div class="pipe-step">
-      <div class="pipe-num">01</div>
-      <h4>Sample State</h4>
-      <p>Uniformly sample a random state inside the bounding mesh volume. With 5% probability, bias toward the goal.</p>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-num">02</div>
-      <h4>Best-First Select</h4>
-      <p>Find the lowest-cost active vertex within δ_bn of the sample. If none exist, extend toward the closest node.</p>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-num">03</div>
-      <h4>Monte Carlo Propagate</h4>
-      <p>Apply random control inputs (yaw rate, pitch rate, linear acc) integrated over a random time t ∈ [0, T_prop].</p>
-    </div>
-    <div class="pipe-step">
-      <div class="pipe-num">04</div>
-      <h4>Prune &amp; Witness</h4>
-      <p>Check if the new node beats its witness region representative. If so, demote the old node to the inactive set.</p>
-    </div>
-  </div>
-</section>
+              <!-- Goal region -->
+              <circle class="goal-ring" cx="232" cy="80" r="11" stroke="#f59e0b" stroke-width="1.5" fill="none" />
+              <circle cx="232" cy="80" r="4" fill="#f59e0b" opacity="0.8" />
+              <text x="242" y="76" fill="#f59e0b" font-size="8" font-family="monospace">goal</text>
 
-<hr class="section-divider"/>
+              <!-- Labels -->
+              <text x="8" y="12" fill="#4b5563" font-size="9" font-family="monospace">SST* — Dense Forestry</text>
+              <text x="8" y="24" fill="#2d3748" font-size="8" font-family="monospace">N=10,000 iters · δ_s=1.5 ·
+                δ_bn=2</text>
+            </svg>
+          </div>
 
-<!-- ── STATE SPACE + CONTROL TABLE ── -->
-<section class="section">
-  <div class="section-head">
-    <h2>State Space &amp; Control Inputs</h2>
-  </div>
+          <!-- Hero copy -->
+          <div class="hero-copy">
+            <p class="kicker">Motion Planning · Robotics · CU Boulder</p>
+            <h1>Drone Motion Planning</h1>
+            <p class="lede">
+              A Python implementation of the SST* (Stable Sparse RRT) motion planning algorithm for navigating
+              a drone through 3D environments — originally built to autonomously follow a snowboarder through dense
+              forestry using dynamically-feasible trajectories.
+            </p>
+            <p class="lede">
+              The system integrates mesh-based collision detection, Monte Carlo propagation, and witness-region pruning
+              to produce
+              sparse yet near-optimal trajectory trees under realistic vehicle dynamics.
+            </p>
 
-  <div class="cards" style="grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div class="tech-chips">
+              <span class="chip">Python</span>
+              <span class="chip">trimesh</span>
+              <span class="chip">scipy · odeint</span>
+              <span class="chip">numpy</span>
+              <span class="chip">SST*</span>
+              <span class="chip">STL / OBJ meshes</span>
+              <span class="chip">Collision Detection</span>
+            </div>
 
-    <div class="card">
-      <h3 style="margin-bottom:10px;">State Vector</h3>
-      <table class="state-table">
-        <thead>
-          <tr>
-            <th>Variable</th>
-            <th>Description</th>
-            <th>Bounds</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>x, y, z</td><td>Position (m)</td><td>Bounding mesh</td></tr>
-          <tr><td>θ (pitch)</td><td>Pitch angle</td><td>[-π/3, π/3]</td></tr>
-          <tr><td>ψ (yaw)</td><td>Heading</td><td>[0, 2π]</td></tr>
-          <tr><td>v</td><td>Forward velocity</td><td>[-1, 1] m/s</td></tr>
-        </tbody>
-      </table>
-    </div>
+            <div class="cta-row">
+              <a href="https://github.com" class="btn">View on GitHub</a>
+              <a href="#algorithm" class="btn btn-ghost">Read the Breakdown ↓</a>
+            </div>
+          </div>
 
-    <div class="card">
-      <h3 style="margin-bottom:10px;">Control Inputs</h3>
-      <table class="state-table">
-        <thead>
-          <tr>
-            <th>Input</th>
-            <th>Description</th>
-            <th>Bounds</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>ω (yaw rate)</td><td>Yaw angular rate</td><td>[-π/12, π/12]</td></tr>
-          <tr><td>α (pitch rate)</td><td>Pitch angular rate</td><td>[-π/12, π/12]</td></tr>
-          <tr><td>a (linear acc)</td><td>Forward acceleration</td><td>[-0.35, 0.35]</td></tr>
-        </tbody>
-      </table>
-    </div>
+        </div>
+      </section>
 
-  </div>
-</section>
+      <hr class="section-divider" />
 
-<hr class="section-divider"/>
+      <!-- ── STATS ── -->
+      <section class="section">
+        <div class="stat-row">
+          <div class="stat-box">
+            <div class="stat-val">10,000</div>
+            <div class="stat-label">SST iterations per run</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">6D</div>
+            <div class="stat-label">State space (x, y, z, pitch, yaw, vel)</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">3</div>
+            <div class="stat-label">Control inputs (ω, α, a)</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">3D STL</div>
+            <div class="stat-label">Mesh-based environment</div>
+          </div>
+        </div>
+      </section>
 
-<!-- ── DYNAMICS MODEL ── -->
-<section class="section">
-  <div class="section-head">
-    <h2>Drone Dynamics Model</h2>
-  </div>
-  <p style="color:var(--muted); max-width:68ch; margin: 0 0 12px;">
-    Trajectories are forward-integrated using a 6-DOF nonlinear drone model with coupled pitch, yaw, and velocity states.
-    The equations of motion are solved with <code>scipy.odeint</code> at each propagation step.
-  </p>
-  <div class="algo-block">
-    <pre><span class="comment"># Drone equations of motion (odeint integration)</span>
+      <hr class="section-divider" />
+
+      <!-- ── OVERVIEW CARDS ── -->
+      <section class="section" id="algorithm">
+        <div class="section-head">
+          <h2>Project Subproblems</h2>
+        </div>
+        <div class="cards">
+
+          <div class="card">
+            <div class="card-top">
+              <h3>Subproblem 1 — No Dynamics</h3>
+              <span class="pill">Baseline</span>
+            </div>
+            <p>
+              A kinematic-only planner that navigates the drone through the flat-slope forestry scene.
+              Collision checking is performed by sampling sphere proxies along candidate paths against the environment
+              STL mesh.
+              Serves as the foundation for understanding SST tree growth and pruning.
+            </p>
+            <div class="card-meta">
+              <span>SubProblem1_NoDynamics.py</span>
+              <span>δ_bn = 2 · T_prop = 2s</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-top">
+              <h3>Subproblem 1 — With Dynamics</h3>
+              <span class="pill">Full Model</span>
+            </div>
+            <p>
+              Adds a full nonlinear drone dynamic model. Trajectories are integrated using <code>scipy.odeint</code>
+              over randomly sampled propagation times. Pitch and velocity bounds are enforced at every integration step
+              before a new vertex is accepted into the active set.
+            </p>
+            <div class="card-meta">
+              <span>SP1_SST_MOTION_PLANNER-DRONE_IN_DENSE_FORESTRY.py</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-top">
+              <h3>SST* Core Algorithm</h3>
+              <span class="pill">Algorithm</span>
+            </div>
+            <p>
+              Implements the Stable Sparse Tree planner with best-first node selection, witness regions for pruning
+              dominated vertices, and Monte Carlo random control propagation — yielding
+              sparse, near-asymptotically-optimal path trees.
+            </p>
+            <div class="card-meta">
+              <span>MotionPlanningAlgorithms/SST.py</span>
+              <span>δ_s = 1.5</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- ── HOW SST WORKS PIPELINE ── -->
+      <section class="section">
+        <div class="section-head">
+          <h2>How SST* Works</h2>
+        </div>
+
+        <div class="pipeline">
+          <div class="pipe-step">
+            <div class="pipe-num">01</div>
+            <h4>Sample State</h4>
+            <p>Uniformly sample a random state inside the bounding mesh volume. With 5% probability, bias toward the
+              goal.</p>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-num">02</div>
+            <h4>Best-First Select</h4>
+            <p>Find the lowest-cost active vertex within δ_bn of the sample. If none exist, extend toward the closest
+              node.</p>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-num">03</div>
+            <h4>Monte Carlo Propagate</h4>
+            <p>Apply random control inputs (yaw rate, pitch rate, linear acc) integrated over a random time t ∈ [0,
+              T_prop].</p>
+          </div>
+          <div class="pipe-step">
+            <div class="pipe-num">04</div>
+            <h4>Prune &amp; Witness</h4>
+            <p>Check if the new node beats its witness region representative. If so, demote the old node to the inactive
+              set.</p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- ── STATE SPACE + CONTROL TABLE ── -->
+      <section class="section">
+        <div class="section-head">
+          <h2>State Space &amp; Control Inputs</h2>
+        </div>
+
+        <div class="cards" style="grid-template-columns: 1fr 1fr; gap: 16px;">
+
+          <div class="card">
+            <h3 style="margin-bottom:10px;">State Vector</h3>
+            <table class="state-table">
+              <thead>
+                <tr>
+                  <th>Variable</th>
+                  <th>Description</th>
+                  <th>Bounds</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>x, y, z</td>
+                  <td>Position (m)</td>
+                  <td>Bounding mesh</td>
+                </tr>
+                <tr>
+                  <td>θ (pitch)</td>
+                  <td>Pitch angle</td>
+                  <td>[-π/3, π/3]</td>
+                </tr>
+                <tr>
+                  <td>ψ (yaw)</td>
+                  <td>Heading</td>
+                  <td>[0, 2π]</td>
+                </tr>
+                <tr>
+                  <td>v</td>
+                  <td>Forward velocity</td>
+                  <td>[-1, 1] m/s</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card">
+            <h3 style="margin-bottom:10px;">Control Inputs</h3>
+            <table class="state-table">
+              <thead>
+                <tr>
+                  <th>Input</th>
+                  <th>Description</th>
+                  <th>Bounds</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ω (yaw rate)</td>
+                  <td>Yaw angular rate</td>
+                  <td>[-π/12, π/12]</td>
+                </tr>
+                <tr>
+                  <td>α (pitch rate)</td>
+                  <td>Pitch angular rate</td>
+                  <td>[-π/12, π/12]</td>
+                </tr>
+                <tr>
+                  <td>a (linear acc)</td>
+                  <td>Forward acceleration</td>
+                  <td>[-0.35, 0.35]</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- ── DYNAMICS MODEL ── -->
+      <section class="section">
+        <div class="section-head">
+          <h2>Drone Dynamics Model</h2>
+        </div>
+        <p style="color:var(--muted); max-width:68ch; margin: 0 0 12px;">
+          Trajectories are forward-integrated using a 6-DOF nonlinear drone model with coupled pitch, yaw, and velocity
+          states.
+          The equations of motion are solved with <code>scipy.odeint</code> at each propagation step.
+        </p>
+        <div class="algo-block">
+          <pre><span class="comment"># Drone equations of motion (odeint integration)</span>
 
 
 <span class="keyword">def</span> <span class="fn">dXdt</span>(X, t):
@@ -338,92 +385,103 @@
 <span class="comment"># Propagate over random time t ∈ [0, T_prop=8s], 10 integration steps</span>
 t = np.linspace(<span class="num">0</span>, t_sampled, <span class="num">10</span>)
 sol = odeint(dXdt, x_0, t)</pre>
-</div>
-</section>
-
-
-<hr class="section-divider"/>
-
-<!-- ── COLLISION DETECTION ── -->
-<section class="section">
-  <div class="section-head">
-    <h2>Mesh Collision Detection</h2>
-  </div>
-  <div class="cards">
-    <div class="card">
-      <div class="card-top">
-        <h3>Environment Mesh</h3>
-        <span class="pill">STL</span>
-      </div>
-      <p>The forestry scene is loaded as a full STL mesh (<code>FlatSlopes_WithTrees.stl</code>). A persistent <code>trimesh.CollisionManager</code> is initialized once at startup and reused across all 10,000 iterations for efficiency.</p>
-    </div>
-    <div class="card">
-      <div class="card-top">
-        <h3>Sphere Proxy Checking</h3>
-        <span class="pill">Per Trajectory</span>
-      </div>
-      <p>At each integration step along a candidate trajectory, an icosphere of radius = drone max dimension / 2 is placed at that position and tested for internal collision against the environment geometry.</p>
-    </div>
-    <div class="card">
-      <div class="card-top">
-        <h3>Bounding Volume</h3>
-        <span class="pill">State Validity</span>
-      </div>
-      <p>A separate bounding volume mesh (<code>FlatSlopes_BoundingVolume.stl</code>) constrains all sampled states. Only states inside this volume are valid — enforced with <code>trimesh.sample.volume_mesh</code>.</p>
-    </div>
-  </div>
-</section>
-
-<hr class="section-divider"/>
-
-<!-- ── SUPPORT / ABOUT ── -->
-<section class="support">
-  <div class="support-inner">
-    <h2>About This Project</h2>
-    <p>
-      Originally developed as the final project for <strong>Advanced Motion Planning</strong> at CU Boulder (Dec 2022).
-      The goal was to plan collision-free, dynamically-feasible drone trajectories through a dense forestry environment
-      to follow a snowboarder. The codebase was later cleaned up and expanded with a modular SST class,
-      improved pruning, and a <code>SceneBuilder</code> utility for exporting trajectory point clouds as STL files.
-    </p>
-    <div class="cta-row">
-      <a href="https://github.com" class="btn">GitHub Repository</a>
-      <a href="../assets/McGrawMatthew_FinalReport_Revised.pdf" class="btn btn-ghost">Final Report (PDF)</a>
-    </div>
-  </div>
-</section>
-
-
-  </div><!-- /.container -->
-</main>
-
-<!-- ── FOOTER ── -->
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-inner">
-      <div>
-        <p class="footer-title">Matthew McGraw</p>
-        <p class="footer-sub">Robotics &amp; Motion Planning</p>
-      </div>
-      <div class="footer-right">
-        <div class="footer-links">
-          <strong style="color:var(--ink); font-size:13px;">Project</strong>
-          <a href="#">Source Code</a>
-          <a href="#">Final Report</a>
-          <a href="#">Notebooks</a>
         </div>
-        <div class="footer-links">
-          <strong style="color:var(--ink); font-size:13px;">Contact</strong>
-          <a href="#">GitHub</a>
-          <a href="#">LinkedIn</a>
-          <a href="#">Email</a>
+      </section>
+
+
+      <hr class="section-divider" />
+
+      <!-- ── COLLISION DETECTION ── -->
+      <section class="section">
+        <div class="section-head">
+          <h2>Mesh Collision Detection</h2>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <div class="card-top">
+              <h3>Environment Mesh</h3>
+              <span class="pill">STL</span>
+            </div>
+            <p>The forestry scene is loaded as a full STL mesh (<code>FlatSlopes_WithTrees.stl</code>). A persistent
+              <code>trimesh.CollisionManager</code> is initialized once at startup and reused across all 10,000
+              iterations for efficiency.
+            </p>
+          </div>
+          <div class="card">
+            <div class="card-top">
+              <h3>Sphere Proxy Checking</h3>
+              <span class="pill">Per Trajectory</span>
+            </div>
+            <p>At each integration step along a candidate trajectory, an icosphere of radius = drone max dimension / 2
+              is placed at that position and tested for internal collision against the environment geometry.</p>
+          </div>
+          <div class="card">
+            <div class="card-top">
+              <h3>Bounding Volume</h3>
+              <span class="pill">State Validity</span>
+            </div>
+            <p>A separate bounding volume mesh (<code>FlatSlopes_BoundingVolume.stl</code>) constrains all sampled
+              states. Only states inside this volume are valid — enforced with <code>trimesh.sample.volume_mesh</code>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-divider" />
+
+      <!-- ── SUPPORT / ABOUT ── -->
+      <section class="support">
+        <div class="support-inner">
+          <h2>About This Project</h2>
+          <p>
+            Originally developed as the final project for <strong>Advanced Motion Planning</strong> at CU Boulder (Dec
+            2022).
+            The goal was to plan collision-free, dynamically-feasible drone trajectories through a dense forestry
+            environment
+            to follow a snowboarder. The codebase was later cleaned up and expanded with a modular SST class,
+            improved pruning, and a <code>SceneBuilder</code> utility for exporting trajectory point clouds as STL
+            files.
+          </p>
+          <div class="cta-row">
+            <a href="https://github.com" class="btn">GitHub Repository</a>
+            <a href="../assets/McGrawMatthew_FinalReport_Revised.pdf" class="btn btn-ghost">Final Report (PDF)</a>
+          </div>
+        </div>
+      </section>
+
+
+    </div><!-- /.container -->
+  </main>
+
+  <!-- ── FOOTER ── -->
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <p class="footer-title">Matthew McGraw</p>
+          <p class="footer-sub">Robotics &amp; Motion Planning</p>
+        </div>
+        <div class="footer-right">
+          <div class="footer-links">
+            <strong style="color:var(--ink); font-size:13px;">Project</strong>
+            <a href="#">Source Code</a>
+            <a href="#">Final Report</a>
+            <a href="#">Notebooks</a>
+          </div>
+          <div class="footer-links">
+            <strong style="color:var(--ink); font-size:13px;">Contact</strong>
+            <a href="#">GitHub</a>
+            <a href="#">LinkedIn</a>
+            <a href="#">Email</a>
+          </div>
         </div>
       </div>
+      <p class="footer-bottom">© 2024 Matthew McGraw · CU Boulder Advanced Motion Planning · Built with Python &amp;
+        trimesh</p>
     </div>
-    <p class="footer-bottom">© 2024 Matthew McGraw · CU Boulder Advanced Motion Planning · Built with Python &amp; trimesh</p>
-  </div>
-</footer>
+  </footer>
 
 </body>
+
 </html>

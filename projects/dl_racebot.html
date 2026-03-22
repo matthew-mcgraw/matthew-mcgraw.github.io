@@ -1,32 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DL RaceBot — Deep RL Racing Agent</title>
-  <link rel="stylesheet" href="../style.css" >
-  <link rel="stylesheet" href="../css/dl_racebot.css" >
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../css/dl_racebot.css">
 </head>
-<body>
-  <a class="skip-link" href="#main">Skip to main content</a>
 
-  <!-- HEADER -->
+<body>
   <header class="site-header">
-    <div class="header-inner container">
-      <span class="brand">DL RaceBot</span>
-      <nav class="nav" aria-label="Page sections">
-        <a href="#overview">Overview</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#training">Training</a>
-        <a href="#results">Results</a>
-        <a href="#code">Code</a>
+    <div class="container header-inner">
+      <a class="brand" href="/">Matthew McGraw</a>
+
+      <nav class="nav">
+        <a href="/" aria-current="page">Home</a>
+        <a href="projects.html">Projects</a>
       </nav>
+
       <div class="social">
-        <a class="icon-btn" href="https://github.com" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+        <!-- Replace hrefs with yours -->
+        <a class="icon-btn" href="https://www.linkedin.com/in/matthew-sm-mcgraw/" target="_blank" rel="noreferrer"
+          aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M4.98 3.5A2.5 2.5 0 1 1 5 8.5a2.5 2.5 0 0 1-.02-5ZM3.5 9h3v12h-3V9Zm7 0h2.9v1.64h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.6V21h-3v-6.2c0-1.48-.03-3.38-2.06-3.38-2.06 0-2.38 1.6-2.38 3.27V21h-3V9Z" />
           </svg>
         </a>
+        <!-- GitHub icon -->
+        <a href="https://github.com/matthew-mcgraw" class="icon-btn" aria-label="GitHub" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+          </svg>
+        </a>
+
       </div>
     </div>
   </header>
@@ -36,29 +45,26 @@
 
       <!-- HERO -->
       <section class="hero" id="overview">
-        
+
         <div class="video-slot" id="slot0">
-                <video
-                  src="../assets/RaceCar_Trained_02_HD_Trim.mov"
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                ></video>
+          <video src="../assets/RaceCar_Trained_02_HD_Trim.mov" autoplay loop muted playsinline></video>
         </div>
         <div class="hero-inner">
 
-          
+
 
           <div class="hero-copy">
             <p class="badge"><span class="badge-dot"></span> CU Boulder · Advanced Robotics · Spring 2023</p>
             <p class="kicker">Deep Reinforcement Learning</p>
             <h1>DL RaceBot</h1>
             <p class="lede">
-              A Proximal Policy Optimization (PPO) agent trained to autonomously race a custom Ackermann vehicle around a rectangular track in the Webots simulator — navigating checkpoints, dodging moving obstacles, and improving lap times across five iterative training phases.
+              A Proximal Policy Optimization (PPO) agent trained to autonomously race a custom Ackermann vehicle around
+              a rectangular track in the Webots simulator — navigating checkpoints, dodging moving obstacles, and
+              improving lap times across five iterative training phases.
             </p>
             <p class="lede">
-              Built on the <strong>deepbots</strong> framework, the agent uses a 60-ray 180° LIDAR sensor, positional state, and orientation to learn entirely from scratch via trial and error.
+              Built on the <strong>deepbots</strong> framework, the agent uses a 60-ray 180° LIDAR sensor, positional
+              state, and orientation to learn entirely from scratch via trial and error.
             </p>
             <div class="cta-row">
               <a class="btn" href="https://github.com">View on GitHub</a>
@@ -79,7 +85,8 @@
               <h3>Simulation Platform</h3>
               <span class="pill">Environment</span>
             </div>
-            <p>Webots robotics simulator with a custom rectangular race track world, an Ackermann-steering vehicle, and an optional moving obstacle.</p>
+            <p>Webots robotics simulator with a custom rectangular race track world, an Ackermann-steering vehicle, and
+              an optional moving obstacle.</p>
             <div class="card-meta">
               <span>Webots + deepbots</span>
               <span>Python 3.10</span>
@@ -90,7 +97,8 @@
               <h3>RL Algorithm</h3>
               <span class="pill">Algorithm</span>
             </div>
-            <p>Proximal Policy Optimization (PPO) with separate Actor and Critic networks. Clipped surrogate objective with γ = 0.99, clip ε = 0.2.</p>
+            <p>Proximal Policy Optimization (PPO) with separate Actor and Critic networks. Clipped surrogate objective
+              with γ = 0.99, clip ε = 0.2.</p>
             <div class="card-meta">
               <span>PyTorch</span>
               <span>CUDA-enabled</span>
@@ -101,7 +109,8 @@
               <h3>Sensor Suite</h3>
               <span class="pill">Perception</span>
             </div>
-            <p>LDS-01 LIDAR (180° field, 60 rays), robot position (x, y), orientation quaternion (xAng, yAng, zAng, θ), and 5 binary checkpoint flags.</p>
+            <p>LDS-01 LIDAR (180° field, 60 rays), robot position (x, y), orientation quaternion (xAng, yAng, zAng, θ),
+              and 5 binary checkpoint flags.</p>
             <div class="card-meta">
               <span>71-dim observation</span>
               <span>Normalized inputs</span>
@@ -118,50 +127,68 @@
         <div class="two-col">
           <div class="card">
             <h3 style="margin:0 0 12px">Neural Networks</h3>
-            <p style="color:var(--muted); margin:0 0 14px; font-size:14px;">Both Actor and Critic share the same compact fully-connected design. Weights saved as <code>.pkl</code> files for later reloading.</p>
-            <div class="stat-row"><span class="stat-label">Input layer</span><span class="stat-val">71 features</span></div>
-            <div class="stat-row"><span class="stat-label">Hidden layers</span><span class="stat-val">128 → 128 (ReLU)</span></div>
-            <div class="stat-row"><span class="stat-label">Actor output</span><span class="stat-val">Softmax → action probs</span></div>
-            <div class="stat-row"><span class="stat-label">Critic output</span><span class="stat-val">Linear → state value</span></div>
-            <div class="stat-row"><span class="stat-label">Optimiser</span><span class="stat-val">Adam (actor 1e-4, critic 1.5e-4)</span></div>
+            <p style="color:var(--muted); margin:0 0 14px; font-size:14px;">Both Actor and Critic share the same compact
+              fully-connected design. Weights saved as <code>.pkl</code> files for later reloading.</p>
+            <div class="stat-row"><span class="stat-label">Input layer</span><span class="stat-val">71 features</span>
+            </div>
+            <div class="stat-row"><span class="stat-label">Hidden layers</span><span class="stat-val">128 → 128
+                (ReLU)</span></div>
+            <div class="stat-row"><span class="stat-label">Actor output</span><span class="stat-val">Softmax → action
+                probs</span></div>
+            <div class="stat-row"><span class="stat-label">Critic output</span><span class="stat-val">Linear → state
+                value</span></div>
+            <div class="stat-row"><span class="stat-label">Optimiser</span><span class="stat-val">Adam (actor 1e-4,
+                critic 1.5e-4)</span></div>
           </div>
           <div class="card">
             <h3 style="margin:0 0 12px">Observation Vector</h3>
-            <p style="color:var(--muted); margin:0 0 14px; font-size:14px;">All values normalised to [−1, 1] before being fed to the networks.</p>
-            <div class="stat-row"><span class="stat-label">x, y position</span><span class="stat-val">2 dims (range ±30 m)</span></div>
-            <div class="stat-row"><span class="stat-label">Orientation axes</span><span class="stat-val">3 dims (xAng, yAng, zAng)</span></div>
-            <div class="stat-row"><span class="stat-label">Rotation angle θ</span><span class="stat-val">1 dim (±π)</span></div>
-            <div class="stat-row"><span class="stat-label">LIDAR range image</span><span class="stat-val">60 dims (0.1 – 4 m)</span></div>
-            <div class="stat-row"><span class="stat-label">Checkpoint flags</span><span class="stat-val">5 dims (binary)</span></div>
+            <p style="color:var(--muted); margin:0 0 14px; font-size:14px;">All values normalised to [−1, 1] before
+              being fed to the networks.</p>
+            <div class="stat-row"><span class="stat-label">x, y position</span><span class="stat-val">2 dims (range ±30
+                m)</span></div>
+            <div class="stat-row"><span class="stat-label">Orientation axes</span><span class="stat-val">3 dims (xAng,
+                yAng, zAng)</span></div>
+            <div class="stat-row"><span class="stat-label">Rotation angle θ</span><span class="stat-val">1 dim
+                (±π)</span></div>
+            <div class="stat-row"><span class="stat-label">LIDAR range image</span><span class="stat-val">60 dims (0.1 –
+                4 m)</span></div>
+            <div class="stat-row"><span class="stat-label">Checkpoint flags</span><span class="stat-val">5 dims
+                (binary)</span></div>
           </div>
         </div>
 
         <!-- Action Space -->
         <div class="card" style="margin-top:14px">
           <h3 style="margin:0 0 12px">Action Space — Discrete (5 actions)</h3>
-          <p style="color:var(--muted);margin:0 0 14px; font-size:14px;">The agent selects one discrete action per timestep. Turning actions carry a small −0.01 penalty per step to discourage unnecessary steering.</p>
+          <p style="color:var(--muted);margin:0 0 14px; font-size:14px;">The agent selects one discrete action per
+            timestep. Turning actions carry a small −0.01 penalty per step to discourage unnecessary steering.</p>
           <div class="cards" style="grid-template-columns:repeat(5,1fr)">
-            <div style="background:rgba(18,19,22,.04);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;">
+            <div
+              style="background:rgba(18,19,22,.04);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;">
               <div style="font-size:22px;margin-bottom:4px">⏹</div>
               <strong style="font-size:13px">Action 0</strong>
               <p style="font-size:12px;color:var(--muted);margin:4px 0 0">Stop (v=0, θ=0)</p>
             </div>
-            <div style="background:rgba(18,19,22,.04);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;">
+            <div
+              style="background:rgba(18,19,22,.04);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;">
               <div style="font-size:22px;margin-bottom:4px">🐢</div>
               <strong style="font-size:13px">Action 1</strong>
               <p style="font-size:12px;color:var(--muted);margin:4px 0 0">Half speed (v=40)</p>
             </div>
-            <div style="background:rgba(18,19,22,.04);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;">
+            <div
+              style="background:rgba(18,19,22,.04);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;">
               <div style="font-size:22px;margin-bottom:4px">🚗</div>
               <strong style="font-size:13px">Action 2</strong>
               <p style="font-size:12px;color:var(--muted);margin:4px 0 0">¾ speed (v=60)</p>
             </div>
-            <div style="background:rgba(18,19,22,.04);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;">
+            <div
+              style="background:rgba(18,19,22,.04);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;">
               <div style="font-size:22px;margin-bottom:4px">↩</div>
               <strong style="font-size:13px">Action 3</strong>
               <p style="font-size:12px;color:var(--muted);margin:4px 0 0">Steer left (35°)</p>
             </div>
-            <div style="background:rgba(18,19,22,.04);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;">
+            <div
+              style="background:rgba(18,19,22,.04);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;">
               <div style="font-size:22px;margin-bottom:4px">↪</div>
               <strong style="font-size:13px">Action 4</strong>
               <p style="font-size:12px;color:var(--muted);margin:4px 0 0">Steer right (35°)</p>
@@ -174,15 +201,22 @@
           <h3 style="margin:0 0 12px">Reward Shaping</h3>
           <div class="two-col">
             <div>
-              <div class="stat-row"><span class="stat-label">Distance moved each step</span><span class="stat-val" style="color:#16a34a">+ dist(Δx, Δy)</span></div>
-              <div class="stat-row"><span class="stat-label">Checkpoint passed</span><span class="stat-val" style="color:#16a34a">+1 × 4 checkpoints</span></div>
-              <div class="stat-row"><span class="stat-label">Lap completed</span><span class="stat-val" style="color:#16a34a">+100</span></div>
+              <div class="stat-row"><span class="stat-label">Distance moved each step</span><span class="stat-val"
+                  style="color:#16a34a">+ dist(Δx, Δy)</span></div>
+              <div class="stat-row"><span class="stat-label">Checkpoint passed</span><span class="stat-val"
+                  style="color:#16a34a">+1 × 4 checkpoints</span></div>
+              <div class="stat-row"><span class="stat-label">Lap completed</span><span class="stat-val"
+                  style="color:#16a34a">+100</span></div>
             </div>
             <div>
-              <div class="stat-row"><span class="stat-label">LIDAR collision (ray &lt; 0.125 m)</span><span class="stat-val" style="color:#dc2626">−10</span></div>
-              <div class="stat-row"><span class="stat-label">Median LIDAR &lt; 0.25 m</span><span class="stat-val" style="color:#dc2626">−10</span></div>
-              <div class="stat-row"><span class="stat-label">Vehicle flipped</span><span class="stat-val" style="color:#dc2626">−10</span></div>
-              <div class="stat-row"><span class="stat-label">Steering action taken</span><span class="stat-val" style="color:#dc2626">−0.01/step</span></div>
+              <div class="stat-row"><span class="stat-label">LIDAR collision (ray &lt; 0.125 m)</span><span
+                  class="stat-val" style="color:#dc2626">−10</span></div>
+              <div class="stat-row"><span class="stat-label">Median LIDAR &lt; 0.25 m</span><span class="stat-val"
+                  style="color:#dc2626">−10</span></div>
+              <div class="stat-row"><span class="stat-label">Vehicle flipped</span><span class="stat-val"
+                  style="color:#dc2626">−10</span></div>
+              <div class="stat-row"><span class="stat-label">Steering action taken</span><span class="stat-val"
+                  style="color:#dc2626">−0.01/step</span></div>
             </div>
           </div>
         </div>
@@ -200,35 +234,40 @@
               <div class="tl-node active">1</div>
               <div class="tl-body">
                 <strong>Controller 01 — Baseline</strong>
-                <p>4 actions (stop, forward, steer L/R). Full LIDAR rays from sensor. Drive speed = 40. Establishes core lap-completion capability.</p>
+                <p>4 actions (stop, forward, steer L/R). Full LIDAR rays from sensor. Drive speed = 40. Establishes core
+                  lap-completion capability.</p>
               </div>
             </div>
             <div class="tl-item">
               <div class="tl-node active">2</div>
               <div class="tl-body">
                 <strong>Controller 02 — Refinement</strong>
-                <p>Identical architecture to 01 but trained from a fresh seed. Used to compare convergence consistency and agent quality across runs.</p>
+                <p>Identical architecture to 01 but trained from a fresh seed. Used to compare convergence consistency
+                  and agent quality across runs.</p>
               </div>
             </div>
             <div class="tl-item">
               <div class="tl-node active">3</div>
               <div class="tl-body">
                 <strong>Controller 03 — Moving Obstacles</strong>
-                <p>Moving obstacle added to the track. Obstacle position appended to observations. Separate MovingObstacleController bounces the obstacle up and down the straight.</p>
+                <p>Moving obstacle added to the track. Obstacle position appended to observations. Separate
+                  MovingObstacleController bounces the obstacle up and down the straight.</p>
               </div>
             </div>
             <div class="tl-item">
               <div class="tl-node active">4</div>
               <div class="tl-body">
                 <strong>Controller 04 — Multi-Speed</strong>
-                <p>Action space expanded to 5 (adds half-speed and ¾-speed). Drive max = 80. Steering penalty added. Batch size raised to 64 for more stable updates.</p>
+                <p>Action space expanded to 5 (adds half-speed and ¾-speed). Drive max = 80. Steering penalty added.
+                  Batch size raised to 64 for more stable updates.</p>
               </div>
             </div>
             <div class="tl-item">
               <div class="tl-node active">5</div>
               <div class="tl-body">
                 <strong>Controller 05 — Better Lap Times</strong>
-                <p>Continues from a pre-trained Racer_MultiSpeed_04_Faster checkpoint. Fine-tuned for minimum lap time with the multi-speed action set.</p>
+                <p>Continues from a pre-trained Racer_MultiSpeed_04_Faster checkpoint. Fine-tuned for minimum lap time
+                  with the multi-speed action set.</p>
               </div>
             </div>
           </div>
@@ -236,19 +275,27 @@
           <div>
             <div class="card" style="margin-bottom:14px">
               <h3 style="margin:0 0 10px">PPO Hyperparameters</h3>
-              <div class="stat-row"><span class="stat-label">Discount factor γ</span><span class="stat-val">0.99</span></div>
+              <div class="stat-row"><span class="stat-label">Discount factor γ</span><span class="stat-val">0.99</span>
+              </div>
               <div class="stat-row"><span class="stat-label">PPO clip ε</span><span class="stat-val">0.2</span></div>
               <div class="stat-row"><span class="stat-label">Max grad norm</span><span class="stat-val">0.5</span></div>
-              <div class="stat-row"><span class="stat-label">PPO update iterations</span><span class="stat-val">5 per episode</span></div>
-              <div class="stat-row"><span class="stat-label">Batch size (Controllers 1–3)</span><span class="stat-val">16</span></div>
-              <div class="stat-row"><span class="stat-label">Batch size (Controller 4+)</span><span class="stat-val">64</span></div>
-              <div class="stat-row"><span class="stat-label">Max steps per episode</span><span class="stat-val">50 000</span></div>
-              <div class="stat-row"><span class="stat-label">Episode limit</span><span class="stat-val">50 000</span></div>
-              <div class="stat-row"><span class="stat-label">Solve criterion</span><span class="stat-val">Mean score &gt; 200 over last 200 episodes</span></div>
+              <div class="stat-row"><span class="stat-label">PPO update iterations</span><span class="stat-val">5 per
+                  episode</span></div>
+              <div class="stat-row"><span class="stat-label">Batch size (Controllers 1–3)</span><span
+                  class="stat-val">16</span></div>
+              <div class="stat-row"><span class="stat-label">Batch size (Controller 4+)</span><span
+                  class="stat-val">64</span></div>
+              <div class="stat-row"><span class="stat-label">Max steps per episode</span><span class="stat-val">50
+                  000</span></div>
+              <div class="stat-row"><span class="stat-label">Episode limit</span><span class="stat-val">50 000</span>
+              </div>
+              <div class="stat-row"><span class="stat-label">Solve criterion</span><span class="stat-val">Mean score
+                  &gt; 200 over last 200 episodes</span></div>
             </div>
             <div class="card">
               <h3 style="margin:0 0 10px">Saved Models</h3>
-              <p style="color:var(--muted);font-size:14px;margin:0 0 12px">All trained actor/critic pairs are serialised with <code>torch.save()</code> and can be reloaded for inference without retraining.</p>
+              <p style="color:var(--muted);font-size:14px;margin:0 0 12px">All trained actor/critic pairs are serialised
+                with <code>torch.save()</code> and can be reloaded for inference without retraining.</p>
               <div class="chip-list">
                 <span class="chip">Racer_01</span>
                 <span class="chip">Racer_02</span>
@@ -271,18 +318,27 @@
         </div>
         <div class="cards">
           <div class="card">
-            <div class="card-top"><h3>Webots World Files</h3><span class="pill">Simulation</span></div>
-            <p>Three <code>.wbt</code> worlds: a bare rectangular track, a track with motion recorder, and a version with a teleporting moving obstacle patrolling the back straight.</p>
+            <div class="card-top">
+              <h3>Webots World Files</h3><span class="pill">Simulation</span>
+            </div>
+            <p>Three <code>.wbt</code> worlds: a bare rectangular track, a track with motion recorder, and a version
+              with a teleporting moving obstacle patrolling the back straight.</p>
             <div class="card-meta"><span>RectangularTrack.wbt</span><span>Moving obstacle variant</span></div>
           </div>
           <div class="card">
-            <div class="card-top"><h3>Custom Vehicle Protos</h3><span class="pill">Hardware Model</span></div>
-            <p>The <em>BuffCar</em> is an Ackermann-steering 4-wheel vehicle built from custom <code>.proto</code> files. Front wheels apply differential steering; rear wheels provide rear-wheel drive.</p>
+            <div class="card-top">
+              <h3>Custom Vehicle Protos</h3><span class="pill">Hardware Model</span>
+            </div>
+            <p>The <em>BuffCar</em> is an Ackermann-steering 4-wheel vehicle built from custom <code>.proto</code>
+              files. Front wheels apply differential steering; rear wheels provide rear-wheel drive.</p>
             <div class="card-meta"><span>Track: 0.254 m</span><span>Wheelbase: 0.292 m</span></div>
           </div>
           <div class="card">
-            <div class="card-top"><h3>Moving Obstacle</h3><span class="pill">Challenge</span></div>
-            <p>An independent Supervisor controller teleports a blocker obstacle to a random x-position on the straight, then translates it northward at a fixed rate, resetting when it crosses y = 11 m.</p>
+            <div class="card-top">
+              <h3>Moving Obstacle</h3><span class="pill">Challenge</span>
+            </div>
+            <p>An independent Supervisor controller teleports a blocker obstacle to a random x-position on the straight,
+              then translates it northward at a fixed rate, resetting when it crosses y = 11 m.</p>
             <div class="card-meta"><span>Random spawn x</span><span>Constant y velocity</span></div>
           </div>
         </div>
@@ -294,21 +350,32 @@
         <div class="two-col">
           <div class="card">
             <h3 style="margin:0 0 12px">Demonstrated Capabilities</h3>
-            <div class="stat-row"><span class="stat-label">Complete full rectangular lap</span><span class="stat-val">✓</span></div>
-            <div class="stat-row"><span class="stat-label">LIDAR-based collision avoidance</span><span class="stat-val">✓</span></div>
-            <div class="stat-row"><span class="stat-label">Dynamic obstacle avoidance</span><span class="stat-val">✓</span></div>
-            <div class="stat-row"><span class="stat-label">Variable speed control</span><span class="stat-val">✓</span></div>
-            <div class="stat-row"><span class="stat-label">Transfer learning (model reloading)</span><span class="stat-val">✓</span></div>
-            <div class="stat-row"><span class="stat-label">Lap time optimisation</span><span class="stat-val">✓</span></div>
+            <div class="stat-row"><span class="stat-label">Complete full rectangular lap</span><span
+                class="stat-val">✓</span></div>
+            <div class="stat-row"><span class="stat-label">LIDAR-based collision avoidance</span><span
+                class="stat-val">✓</span></div>
+            <div class="stat-row"><span class="stat-label">Dynamic obstacle avoidance</span><span
+                class="stat-val">✓</span></div>
+            <div class="stat-row"><span class="stat-label">Variable speed control</span><span class="stat-val">✓</span>
+            </div>
+            <div class="stat-row"><span class="stat-label">Transfer learning (model reloading)</span><span
+                class="stat-val">✓</span></div>
+            <div class="stat-row"><span class="stat-label">Lap time optimisation</span><span class="stat-val">✓</span>
+            </div>
           </div>
           <div class="card">
             <h3 style="margin:0 0 12px">Video Recordings</h3>
-            <p style="color:var(--muted);font-size:14px;margin:0 0 12px">Two trimmed HD demonstration videos are included in <code>TrainedModelTests/</code>.</p>
-            <div class="stat-row"><span class="stat-label">RaceCar_Trained_02_HD_Trim.mp4</span><span class="stat-val">Base lap</span></div>
-            <div class="stat-row"><span class="stat-label">MovingObstacle_Success_Trim.mp4</span><span class="stat-val">Obstacle dodge</span></div>
+            <p style="color:var(--muted);font-size:14px;margin:0 0 12px">Two trimmed HD demonstration videos are
+              included in <code>TrainedModelTests/</code>.</p>
+            <div class="stat-row"><span class="stat-label">RaceCar_Trained_02_HD_Trim.mp4</span><span
+                class="stat-val">Base lap</span></div>
+            <div class="stat-row"><span class="stat-label">MovingObstacle_Success_Trim.mp4</span><span
+                class="stat-val">Obstacle dodge</span></div>
             <div style="margin-top:14px;">
-              <div style="background:rgba(18,19,22,.04);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:13px;color:var(--muted);">
-                📹 Videos can be viewed by extracting the project zip and opening from the <code>TrainedModelTests/</code> folder.
+              <div
+                style="background:rgba(18,19,22,.04);border:1px solid var(--line);border-radius:12px;padding:14px;font-size:13px;color:var(--muted);">
+                📹 Videos can be viewed by extracting the project zip and opening from the
+                <code>TrainedModelTests/</code> folder.
               </div>
             </div>
           </div>
@@ -324,7 +391,7 @@
         <div class="two-col">
           <div class="card">
             <h3 style="margin:0 0 12px">Actor &amp; Critic Networks</h3>
-<pre><span class="kw">class</span> <span class="fn">Actor</span>(nn.Module):
+            <pre><span class="kw">class</span> <span class="fn">Actor</span>(nn.Module):
     <span class="kw">def</span> <span class="fn">__init__</span>(self, n_inputs, n_outputs):
         <span class="fn">super</span>().<span class="fn">__init__</span>()
         self.fc1 = nn.Linear(n_inputs, <span class="nu">128</span>)
@@ -350,7 +417,7 @@
           </div>
           <div class="card">
             <h3 style="margin:0 0 12px">PPO Update Step</h3>
-<pre><span class="cm"># For each batch in buffer:</span>
+            <pre><span class="cm"># For each batch in buffer:</span>
 V = self.<span class="fn">critic_net</span>(state[index])
 delta = Gt_index - V
 advantage = delta.<span class="fn">detach</span>()
@@ -372,8 +439,10 @@ value_loss  = F.<span class="fn">mse_loss</span>(Gt_index, V)</pre>
 
         <div class="card" style="margin-top:14px">
           <h3 style="margin:0 0 12px">Ackermann Steering Geometry</h3>
-          <p style="color:var(--muted);font-size:14px;margin:0 0 12px">The agent outputs a single steering angle; the controller converts it to per-wheel angles satisfying Ackermann geometry so the inner and outer front wheels track correctly.</p>
-<pre><span class="kw">def</span> <span class="fn">set_steering_angle</span>(self, angle_rad):
+          <p style="color:var(--muted);font-size:14px;margin:0 0 12px">The agent outputs a single steering angle; the
+            controller converts it to per-wheel angles satisfying Ackermann geometry so the inner and outer front wheels
+            track correctly.</p>
+          <pre><span class="kw">def</span> <span class="fn">set_steering_angle</span>(self, angle_rad):
     trackFront = <span class="nu">0.254</span>   <span class="cm"># metres</span>
     wheelbase  = <span class="nu">0.2921</span>  <span class="cm"># metres</span>
     <span class="kw">if</span> math.<span class="fn">fabs</span>(angle_rad) > <span class="nu">1e-5</span>:
@@ -440,9 +509,11 @@ value_loss  = F.<span class="fn">mse_loss</span>(Gt_index, V)</pre>
           </div>
         </div>
       </div>
-      <p class="footer-bottom">Matthew McGraw · CU Boulder · Built with deepbots &amp; PyTorch. Please feel free to use these materials as a foundation for your own projects.</p>
+      <p class="footer-bottom">Matthew McGraw · CU Boulder · Built with deepbots &amp; PyTorch. Please feel free to use
+        these materials as a foundation for your own projects.</p>
     </div>
   </footer>
 
 </body>
+
 </html>
