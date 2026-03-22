@@ -105,24 +105,29 @@
     </main>
 
     <footer class="site-footer">
-        <div class="container">
-            <div class="footer-inner">
-                <div class="footer-left">
-                    <p class="footer-title">Let's Connect</p>
-                    <p class="footer-sub">Available for new opportunities.</p>
-                </div>
-                <div class="footer-right">
-                    <div class="footer-links">
-                        <a href="mailto:hello@example.com">Email</a>
-                        <a href="#">LinkedIn</a>
-                    </div>
-                </div>
+        <div class="container footer-inner">
+            <div>
+                <p class="footer-title">Matthew McGraw</p>
+                <p class="footer-sub">Contact: <a class="text-link"
+                        href="mailto:matthew.sm.mcgraw@gmail.com">matthew.sm.mcgraw@gmail.com</a></p>
             </div>
-            <div class="footer-bottom">
-                &copy; 2024 My Portfolio
+            <div class="footer-right">
+                <div class="footer-links">
+                    <a href="/">Home</a>
+                    <a href="projects.html">Projects</a>
+                </div>
+                <div class="footer-links">
+                    <a href="https://www.linkedin.com/in/matthew-sm-mcgraw/" target="_blank"
+                        rel="noreferrer">LinkedIn</a>
+                    <a href="https://github.com/matthew-mcgraw" target="_blank" rel="noreferrer">GitHub</a>
+                </div>
             </div>
         </div>
+        <div class="container footer-bottom">
+            <span>© <span id="y"></span> Matthew McGraw</span>
+        </div>
     </footer>
+    <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 </body>
 
 </html>

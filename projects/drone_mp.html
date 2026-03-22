@@ -516,24 +516,28 @@ sol = odeint(dXdt, x_0, t)</pre>
   <!-- ── FOOTER ── -->
 
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div>
-          <p class="footer-title">Matthew McGraw</p>
-          <p class="footer-sub">Robotics &amp; Motion Planning</p>
+    <div class="container footer-inner">
+      <div>
+        <p class="footer-title">Matthew McGraw</p>
+        <p class="footer-sub">Contact: <a class="text-link"
+            href="mailto:matthew.sm.mcgraw@gmail.com">matthew.sm.mcgraw@gmail.com</a></p>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="../projects.html">Projects</a>
         </div>
-        <div class="footer-right">
-          <div class="footer-links">
-            <strong style="color:var(--ink); font-size:13px;">Contact</strong>
-            <a href="https://github.com/matthew-mcgraw">GitHub</a>
-            <a href="https://www.linkedin.com/in/matthew-sm-mcgraw/">LinkedIn</a>
-            <a href="mailto:matthew.sm.mcgraw@gmail.com">Email</a>
-          </div>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/matthew-sm-mcgraw/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="https://github.com/matthew-mcgraw" target="_blank" rel="noreferrer">GitHub</a>
         </div>
       </div>
-      <p class="footer-bottom">© 2024 Matthew McGraw · CU Boulder Advanced Motion Planning · Built with Python &amp;</p>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span id="y"></span> Matthew McGraw</span>
     </div>
   </footer>
+  <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
 
 </body>
 
