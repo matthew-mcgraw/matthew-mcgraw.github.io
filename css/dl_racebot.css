@@ -1,0 +1,305 @@
+/*
+ * css/dl_racebot.css — DL RaceBot page styles
+ * ─────────────────────────────────────────────────────────────
+ * Page-specific styles for dl_racebot.html only.
+ * Always load after the base stylesheet:
+ *   <link rel="stylesheet" href="../style.css">
+ *   <link rel="stylesheet" href="../css/dl_racebot.css">
+ * ─────────────────────────────────────────────────────────────
+ */
+
+
+/* ─────────────────────────────────────────────────────────────
+   BADGE
+   Small pill tag used above the hero headline to show context
+   like "CU Boulder · Advanced Robotics · Spring 2023". Has a
+   green status dot on the left to give it a live/active feel.
+   ───────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.02);
+  margin-bottom: 12px;
+}
+
+/* Small green dot inside the badge — indicates an active/live project */
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: inline-block;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   TRACK VISUAL
+   Square container for the animated race-track SVG in the hero.
+   The gradient background gives a warm parchment feel that
+   contrasts with the dark track lines in the SVG.
+   ───────────────────────────────────────────────────────────── */
+.track-visual {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #f5f4f0 0%, #eeece6 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.track-visual svg {
+  width: 100%;
+  max-width: 280px;
+}
+
+/* The animated car dot that drives around the track path */
+.car-dot {
+  animation: drive 3.6s linear infinite;
+  transform-origin: center;
+}
+
+/* offset-distance animates the element along an SVG motion path */
+@keyframes drive {
+  0%   { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   VIDEO SLOT
+   Container for the hero demo video. Fixed width keeps it
+   aligned with the left-column width from the base hero layout.
+   flex-shrink: 0 prevents it from squashing in flex containers.
+   ───────────────────────────────────────────────────────────── */
+.video-slot {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--card);
+  box-shadow: var(--shadow);
+  width: 320px;
+  flex-shrink: 0;
+}
+
+.video-slot video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   HERO LAYOUT OVERRIDE
+   This page's hero uses a flex row instead of the grid defined
+   in style.css. The video slot and hero copy sit side by side
+   with the video on the left at a fixed width.
+   ───────────────────────────────────────────────────────────── */
+.hero-inner {
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  align-items: start;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   DETAIL GRID
+   Generic two-column grid used to place two cards side by side
+   (e.g. Neural Networks vs Observation Vector). Collapses to
+   a single column on narrow screens.
+   ───────────────────────────────────────────────────────────── */
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 700px) {
+  .detail-grid { grid-template-columns: 1fr; }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   STAT ROW
+   Horizontal row used inside cards to list key-value pairs, e.g.
+   "Input layer → 71 features". A bottom border on each row
+   creates a subtle separator; the last row has none.
+   ───────────────────────────────────────────────────────────── */
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+/* Left-side descriptive label — takes all available space */
+.stat-label {
+  color: var(--muted);
+  font-size: 14px;
+  flex: 1;
+}
+
+/* Right-side value — bold to stand out against the muted label */
+.stat-val {
+  font-weight: 650;
+  font-size: 14px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   CODE BLOCKS
+   Dark monospace panels used for Python code snippets (Actor,
+   Critic, PPO update, Ackermann geometry). Syntax highlight
+   colours are applied via span classes inside the <pre>.
+   ───────────────────────────────────────────────────────────── */
+pre {
+  background: var(--ink);
+  color: #e8e6e0;              /* warm off-white for default tokens */
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  font-size: 13px;
+  line-height: 1.65;
+  overflow-x: auto;            /* horizontal scroll for long lines */
+  margin: 0;
+  font-family: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, monospace;
+}
+
+/* Syntax highlight token colours */
+pre .kw { color: #93c5fd; }   /* blue   — keywords (class, def, return) */
+pre .fn { color: #86efac; }   /* green  — function / method names */
+pre .cm { color: #6b7280; }   /* grey   — comments */
+pre .st { color: #fcd34d; }   /* yellow — string literals */
+pre .nu { color: #f9a8d4; }   /* pink   — numeric literals */
+
+
+/* ─────────────────────────────────────────────────────────────
+   TRAINING TIMELINE
+   Vertical list of training phases, each as a numbered node
+   connected by a vertical line drawn with a ::before pseudo-
+   element. Active nodes (completed phases) are filled solid.
+   ───────────────────────────────────────────────────────────── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 28px 1fr;   /* narrow node column + wide body column */
+  gap: 14px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+/* Vertical connecting line drawn between items using a pseudo-element.
+   Starts below the node circle (top: 28px) and runs to the bottom. */
+.tl-item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 13px;         /* horizontally centred under the 28px node */
+  top: 28px;
+  width: 2px;
+  bottom: 0;
+  background: var(--line);
+}
+
+/* Circular step node */
+.tl-node {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  background: var(--card);
+  display: grid;
+  place-items: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  position: relative;
+  z-index: 1;          /* sits above the connecting line pseudo-element */
+  flex-shrink: 0;
+}
+
+/* Completed / active phase node — filled dark */
+.tl-node.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+.tl-body {
+  padding-top: 4px;
+}
+
+.tl-body strong {
+  display: block;
+  font-size: 15px;
+  letter-spacing: -.1px;
+  margin-bottom: 2px;
+}
+
+.tl-body p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   LAYOUT UTILITIES
+   Small utility classes used inline in the HTML to control
+   specific layout needs on this page.
+   ───────────────────────────────────────────────────────────── */
+
+/* Spans a card across all columns in a grid (e.g. a wide summary card) */
+.full-card {
+  grid-column: 1 / -1;
+}
+
+/* Two-column grid used throughout the page for paired content blocks */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 700px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   CHIP LIST
+   A wrapping row of technology/dependency chips used in the
+   "Tech Stack" support block and the "Saved Models" card.
+   Chips are pill-shaped with a subtle filled background.
+   ───────────────────────────────────────────────────────────── */
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.chip {
+  background: rgba(18,19,22,.05);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 13px;
+}

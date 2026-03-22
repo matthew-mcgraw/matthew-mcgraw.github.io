@@ -1,0 +1,122 @@
+/*
+ * css/bb8.css — BB-8 Stunts page styles
+ * ─────────────────────────────────────────────────────────────
+ * Page-specific styles for bb8.html only.
+ * Always load after the base stylesheet:
+ *   <link rel="stylesheet" href="../style.css">
+ *   <link rel="stylesheet" href="../css/bb8.css">
+ * ─────────────────────────────────────────────────────────────
+ */
+
+
+/* ─────────────────────────────────────────────────────────────
+   VIDEO SLOT
+   Dark container used to display demo videos for each training
+   stage. The dark --ink background shows through while a video
+   is loading or when the slot is empty (waiting for upload).
+   The slot also supports drag-and-drop video loading via JS.
+   ───────────────────────────────────────────────────────────── */
+.video-slot {
+  width: 100%;
+  background: var(--ink);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+/* Slight fade on hover signals the slot is interactive */
+.video-slot:hover {
+  opacity: 0.85;
+}
+
+.video-slot video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* fills the slot without letterboxing */
+  display: block;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   EMPTY STATE — PLAY BUTTON & HINT TEXT
+   Shown inside a video slot before a video has been loaded.
+   The circular play button and hint text are replaced by the
+   video element once a file is dropped or selected.
+   ───────────────────────────────────────────────────────────── */
+
+/* Circular play icon container */
+.play-btn {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* "Drop or click to add video" instructional text */
+.video-hint {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);   /* dim white — visible but not dominant */
+  letter-spacing: 0.05em;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   STAGE LABEL
+   Small uppercase category label that appears above each card's
+   heading to identify which training stage the card belongs to,
+   e.g. "Stage 01", "Stage 02", "Stage 03".
+   ───────────────────────────────────────────────────────────── */
+.stage-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 2px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   FIELD LABEL
+   Small uppercase label used before descriptive paragraphs
+   inside cards, e.g. "Goal" and "How it was achieved".
+   The adjacent sibling selector targets the <p> immediately
+   after the label to tighten the spacing between them.
+   ───────────────────────────────────────────────────────────── */
+.field-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 4px;
+}
+
+/* The paragraph immediately following a .field-label — remove its
+   default top margin so it sits flush under the label. */
+.field-label + p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   RESPONSIVE BREAKPOINTS
+   The two-col layout (defined in dl_racebot.css) is also used
+   on this page — collapse it to a single column on small screens.
+   ───────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .two-col { grid-template-columns: 1fr; }
+}
