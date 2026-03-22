@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../style.css" >
+  <link rel="stylesheet" href="../css/drone_mp.css" >
 </head>
 <body>
 
@@ -19,11 +20,11 @@
 <header class="site-header">
   <div class="header-inner container">
     <span class="brand">Matthew McGraw</span>
-    <nav class="nav" aria-label="Main navigation">
-      <a href="#">Home</a>
-      <a href="#" aria-current="page">Projects</a>
-      <a href="#">About</a>
-    </nav>
+      <nav class="nav" aria-label="Main navigation">
+                  <a href="../index.html">Home</a>
+                  <!-- aria-current="page" applies the active style from your CSS [1] -->
+                  <a href="../projects.html" aria-current="page">Projects</a>
+      </nav>
     <div class="social">
       <!-- GitHub icon -->
       <a href="https://github.com/mcgrawm" class="icon-btn" aria-label="GitHub" target="_blank" rel="noopener">
@@ -324,15 +325,15 @@
 
 
 <span class="keyword">def</span> <span class="fn">dXdt</span>(X, t):
-x, y, z, yaw, theta, v = X
-<span class="keyword">return</span> [
-v * cos(yaw) * cos(theta),   <span class="comment"># ẋ</span>
-v * sin(yaw) * cos(theta),   <span class="comment"># ẏ</span>
-v * sin(theta),              <span class="comment"># ż</span>
-omega,                       <span class="comment"># ψ̇  (yaw rate control)</span>
-alpha,                       <span class="comment"># θ̇  (pitch rate control)</span>
-acc                          <span class="comment"># v̇  (linear acceleration control)</span>
-]
+    x, y, z, yaw, theta, v = X
+    <span class="keyword">return</span> [
+    v * cos(yaw) * cos(theta),   <span class="comment"># ẋ</span>
+    v * sin(yaw) * cos(theta),   <span class="comment"># ẏ</span>
+    v * sin(theta),              <span class="comment"># ż</span>
+    omega,                       <span class="comment"># ψ̇  (yaw rate control)</span>
+    alpha,                       <span class="comment"># θ̇  (pitch rate control)</span>
+    acc                          <span class="comment"># v̇  (linear acceleration control)</span>
+    ]
 
 <span class="comment"># Propagate over random time t ∈ [0, T_prop=8s], 10 integration steps</span>
 t = np.linspace(<span class="num">0</span>, t_sampled, <span class="num">10</span>)
