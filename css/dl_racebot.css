@@ -86,7 +86,7 @@
   border: 1px solid var(--line);
   background: var(--card);
   box-shadow: var(--shadow);
-  width: 320px;
+  width: 500px;
   flex-shrink: 0;
 }
 
