@@ -48,6 +48,10 @@ html, body {
   padding: 0;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   /* System font stack — uses the OS's native sans-serif for speed
      and a familiar feel. Line-height 1.6 keeps body text readable. */
